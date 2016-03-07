@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dmlmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="contactRefNumber" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ContactItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="preferredContactType" Type="bit" />
+          <Property Name="email" Type="varchar" MaxLength="150" />
+          <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="cellPhoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="address1" Type="varchar" MaxLength="50" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="address3" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" MaxLength="150" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="postalCode" Type="nchar" MaxLength="10" />
+          <Property Name="workingHoursStartTime" Type="time" Precision="7" />
+          <Property Name="workingHoursEndTime" Type="time" Precision="7" />
+          <Property Name="contactId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DefaultUOM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InventoryCount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="count" Type="float" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="inventoryLocationId" Type="int" Nullable="false" />
+          <Property Name="updateDate" Type="datetime" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="uomId" Type="int" />
+        </EntityType>
+        <EntityType Name="InventoryLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="updateDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="address1" Type="varchar" MaxLength="50" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="address3" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="postalCode" Type="nchar" MaxLength="10" />
+          <Property Name="county" Type="varchar" MaxLength="50" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="long" Type="float" />
+          <Property Name="radius" Type="float" />
+          <Property Name="zoneDescription" Type="varchar" MaxLength="50" />
+          <Property Name="googleMapSmall" Type="varchar" MaxLength="250" />
+          <Property Name="googleMapMedium" Type="varchar" MaxLength="250" />
+          <Property Name="url" Type="varchar" MaxLength="250" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="50" />
+          <Property Name="operatingHoursStart" Type="time" Precision="7" />
+          <Property Name="operatingHoursEnd" Type="time" Precision="7" />
+          <Property Name="operatingDays" Type="varchar" MaxLength="50" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+          <Property Name="locationCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+          <Property Name="contactId" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="isPrimaryContact" Type="bit" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address1" Type="varchar" MaxLength="50" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="address3" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="nchar" MaxLength="10" />
+          <Property Name="postalCode" Type="nchar" MaxLength="10" />
+          <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="businessPhoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="faxNumber" Type="nchar" MaxLength="10" />
+          <Property Name="contactPrimaryId" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="urlPrimaryImage" Type="varchar" MaxLength="250" />
+          <Property Name="urlProduct" Type="varchar" MaxLength="250" />
+          <Property Name="upc" Type="varchar" MaxLength="150" />
+          <Property Name="partNumber" Type="varchar" MaxLength="150" />
+          <Property Name="stockingCode" Type="varchar" MaxLength="50" />
+          <Property Name="manufacturerId" Type="int" Nullable="false" />
+          <Property Name="uomId" Type="int" Nullable="false" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+          <Property Name="updateDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="productCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="150" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductInventoryLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="inventoryLocationId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegionLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="regionId" Type="int" Nullable="false" />
+          <Property Name="locationId" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="RegionUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="regionId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="isManager" Type="bit" />
+        </EntityType>
+        <EntityType Name="ServiceProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address1" Type="varchar" MaxLength="50" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="address3" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="postalCode" Type="varchar" MaxLength="50" />
+          <Property Name="googleMap" Type="varchar" MaxLength="250" />
+          <Property Name="contactPrimaryId" Type="int" />
+          <Property Name="organizationId" Type="int" Nullable="false" />
+          <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="faxNumber" Type="nchar" MaxLength="10" />
+          <Property Name="businessPhoneNumber" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="type" Type="nchar" MaxLength="10" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="defaultUOMId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="employeeNumber" Type="varchar" MaxLength="50" />
+          <Property Name="emailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="cellPhoneNumber" Type="bit" />
+          <Property Name="isActive" Type="nchar" MaxLength="10" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="serviceProviderId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="dmlmModelStoreContainer">
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactItem" EntityType="Self.ContactItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DefaultUOM" EntityType="Self.DefaultUOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryCount" EntityType="Self.InventoryCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryLocation" EntityType="Self.InventoryLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationCategory" EntityType="Self.LocationCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationContact" EntityType="Self.LocationContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInventoryLocation" EntityType="Self.ProductInventoryLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegionLocation" EntityType="Self.RegionLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegionUser" EntityType="Self.RegionUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceProvider" EntityType="Self.ServiceProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dmlmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dmlmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="dmlmModel.Contact" />
+          <EntitySet Name="ContactItems" EntityType="dmlmModel.ContactItem" />
+          <EntitySet Name="DefaultUOMs" EntityType="dmlmModel.DefaultUOM" />
+          <EntitySet Name="InventoryCounts" EntityType="dmlmModel.InventoryCount" />
+          <EntitySet Name="InventoryLocations" EntityType="dmlmModel.InventoryLocation" />
+          <EntitySet Name="Locations" EntityType="dmlmModel.Location" />
+          <EntitySet Name="LocationCategories" EntityType="dmlmModel.LocationCategory" />
+          <EntitySet Name="LocationContacts" EntityType="dmlmModel.LocationContact" />
+          <EntitySet Name="Organizations" EntityType="dmlmModel.Organization" />
+          <EntitySet Name="Products" EntityType="dmlmModel.Product" />
+          <EntitySet Name="ProductCategories" EntityType="dmlmModel.ProductCategory" />
+          <EntitySet Name="ProductInventoryLocations" EntityType="dmlmModel.ProductInventoryLocation" />
+          <EntitySet Name="Regions" EntityType="dmlmModel.Region" />
+          <EntitySet Name="RegionLocations" EntityType="dmlmModel.RegionLocation" />
+          <EntitySet Name="RegionUsers" EntityType="dmlmModel.RegionUser" />
+          <EntitySet Name="ServiceProviders" EntityType="dmlmModel.ServiceProvider" />
+          <EntitySet Name="Territories" EntityType="dmlmModel.Territory" />
+          <EntitySet Name="UOMs" EntityType="dmlmModel.UOM" />
+          <EntitySet Name="Users" EntityType="dmlmModel.User" />
+          <AssociationSet Name="OrganizationServiceProvider" Association="dmlmModel.OrganizationServiceProvider">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProviderRegion" Association="dmlmModel.ServiceProviderRegion">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProviderContact" Association="dmlmModel.ServiceProviderContact">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="ContactContactItem" Association="dmlmModel.ContactContactItem">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="ContactItem" EntitySet="ContactItems" />
+          </AssociationSet>
+          <AssociationSet Name="ContactLocationContact" Association="dmlmModel.ContactLocationContact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="LocationContact" EntitySet="LocationContacts" />
+          </AssociationSet>
+          <AssociationSet Name="LocationLocationContact" Association="dmlmModel.LocationLocationContact">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LocationContact" EntitySet="LocationContacts" />
+          </AssociationSet>
+          <AssociationSet Name="LocationInventoryLocation" Association="dmlmModel.LocationInventoryLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="InventoryLocation" EntitySet="InventoryLocations" />
+          </AssociationSet>
+          <AssociationSet Name="LocationCategoryLocation" Association="dmlmModel.LocationCategoryLocation">
+            <End Role="LocationCategory" EntitySet="LocationCategories" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="ProductCategoryProduct" Association="dmlmModel.ProductCategoryProduct">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="ProductInventoryCount" Association="dmlmModel.ProductInventoryCount">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="InventoryCount" EntitySet="InventoryCounts" />
+          </AssociationSet>
+          <AssociationSet Name="InventoryLocationInventoryCount" Association="dmlmModel.InventoryLocationInventoryCount">
+            <End Role="InventoryLocation" EntitySet="InventoryLocations" />
+            <End Role="InventoryCount" EntitySet="InventoryCounts" />
+          </AssociationSet>
+          <AssociationSet Name="DefaultUOMUOM" Association="dmlmModel.DefaultUOMUOM">
+            <End Role="DefaultUOM" EntitySet="DefaultUOMs" />
+            <End Role="UOM" EntitySet="UOMs" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProviderProductCategory" Association="dmlmModel.ServiceProviderProductCategory">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="contactRefNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderContact" FromRole="Contact" ToRole="ServiceProvider" />
+          <NavigationProperty Name="ContactItems" Relationship="dmlmModel.ContactContactItem" FromRole="Contact" ToRole="ContactItem" />
+          <NavigationProperty Name="LocationContacts" Relationship="dmlmModel.ContactLocationContact" FromRole="Contact" ToRole="LocationContact" />
+        </EntityType>
+        <EntityType Name="ContactItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="preferredContactType" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cellPhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="workingHoursStartTime" Type="Time" Precision="7" />
+          <Property Name="workingHoursEndTime" Type="Time" Precision="7" />
+          <Property Name="contactId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contact" Relationship="dmlmModel.ContactContactItem" FromRole="ContactItem" ToRole="Contact" />
+        </EntityType>
+        <EntityType Name="DefaultUOM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UOMs" Relationship="dmlmModel.DefaultUOMUOM" FromRole="DefaultUOM" ToRole="UOM" />
+        </EntityType>
+        <EntityType Name="InventoryCount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Double" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="inventoryLocationId" Type="Int32" Nullable="false" />
+          <Property Name="updateDate" Type="DateTime" Precision="3" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="uomId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="dmlmModel.ProductInventoryCount" FromRole="InventoryCount" ToRole="Product" />
+          <NavigationProperty Name="InventoryLocation" Relationship="dmlmModel.InventoryLocationInventoryCount" FromRole="InventoryCount" ToRole="InventoryLocation" />
+        </EntityType>
+        <EntityType Name="InventoryLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="updateDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Location" Relationship="dmlmModel.LocationInventoryLocation" FromRole="InventoryLocation" ToRole="Location" />
+          <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.InventoryLocationInventoryCount" FromRole="InventoryLocation" ToRole="InventoryCount" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="long" Type="Double" />
+          <Property Name="radius" Type="Double" />
+          <Property Name="zoneDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="googleMapSmall" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="googleMapMedium" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="operatingHoursStart" Type="Time" Precision="7" />
+          <Property Name="operatingHoursEnd" Type="Time" Precision="7" />
+          <Property Name="operatingDays" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LocationContacts" Relationship="dmlmModel.LocationLocationContact" FromRole="Location" ToRole="LocationContact" />
+          <NavigationProperty Name="InventoryLocations" Relationship="dmlmModel.LocationInventoryLocation" FromRole="Location" ToRole="InventoryLocation" />
+          <Property Name="locationCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LocationCategory" Relationship="dmlmModel.LocationCategoryLocation" FromRole="Location" ToRole="LocationCategory" />
+        </EntityType>
+        <EntityType Name="LocationCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Locations" Relationship="dmlmModel.LocationCategoryLocation" FromRole="LocationCategory" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="LocationContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="contactId" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isPrimaryContact" Type="Boolean" />
+          <NavigationProperty Name="Contact" Relationship="dmlmModel.ContactLocationContact" FromRole="LocationContact" ToRole="Contact" />
+          <NavigationProperty Name="Location" Relationship="dmlmModel.LocationLocationContact" FromRole="LocationContact" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="businessPhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="faxNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="contactPrimaryId" Type="Int32" />
+          <NavigationProperty Name="ServiceProviders" Relationship="dmlmModel.OrganizationServiceProvider" FromRole="Organization" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="urlPrimaryImage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="urlProduct" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="upc" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="partNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="stockingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="manufacturerId" Type="Int32" Nullable="false" />
+          <Property Name="uomId" Type="Int32" Nullable="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="updateDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="ProductCategory" Relationship="dmlmModel.ProductCategoryProduct" FromRole="Product" ToRole="ProductCategory" />
+          <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.ProductInventoryCount" FromRole="Product" ToRole="InventoryCount" />
+          <Property Name="productCategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="dmlmModel.ProductCategoryProduct" FromRole="ProductCategory" ToRole="Product" />
+          <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderProductCategory" FromRole="ProductCategory" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="ProductInventoryLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="inventoryLocationId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderRegion" FromRole="Region" ToRole="ServiceProvider" />
+        </EntityType>
+        <EntityType Name="RegionLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="regionId" Type="Int32" Nullable="false" />
+          <Property Name="locationId" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="RegionUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="regionId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isManager" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ServiceProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="googleMap" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="contactPrimaryId" Type="Int32" />
+          <Property Name="organizationId" Type="Int32" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="faxNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="businessPhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Organization" Relationship="dmlmModel.OrganizationServiceProvider" FromRole="ServiceProvider" ToRole="Organization" />
+          <NavigationProperty Name="Regions" Relationship="dmlmModel.ServiceProviderRegion" FromRole="ServiceProvider" ToRole="Region" />
+          <NavigationProperty Name="Contacts" Relationship="dmlmModel.ServiceProviderContact" FromRole="ServiceProvider" ToRole="Contact" />
+          <NavigationProperty Name="ProductCategories" Relationship="dmlmModel.ServiceProviderProductCategory" FromRole="ServiceProvider" ToRole="ProductCategory" />
+        </EntityType>
+        <EntityType Name="Territory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UOM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="defaultUOMId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DefaultUOM" Relationship="dmlmModel.DefaultUOMUOM" FromRole="UOM" ToRole="DefaultUOM" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employeeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cellPhoneNumber" Type="Boolean" />
+          <Property Name="isActive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="OrganizationServiceProvider">
+          <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProvider">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProviderRegion">
+          <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="dmlmModel.Region" Role="Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="serviceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProviderContact">
+          <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="dmlmModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="serviceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContactContactItem">
+          <End Type="dmlmModel.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="dmlmModel.ContactItem" Role="ContactItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactItem">
+              <PropertyRef Name="contactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContactLocationContact">
+          <End Type="dmlmModel.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="dmlmModel.LocationContact" Role="LocationContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocationContact">
+              <PropertyRef Name="contactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationLocationContact">
+          <End Type="dmlmModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="dmlmModel.LocationContact" Role="LocationContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocationContact">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationInventoryLocation">
+          <End Type="dmlmModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="dmlmModel.InventoryLocation" Role="InventoryLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryLocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationCategoryLocation">
+          <End Type="dmlmModel.LocationCategory" Role="LocationCategory" Multiplicity="1" />
+          <End Type="dmlmModel.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="locationCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductCategoryProduct">
+          <End Type="dmlmModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+          <End Type="dmlmModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="productCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductInventoryCount">
+          <End Type="dmlmModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="dmlmModel.InventoryCount" Role="InventoryCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryCount">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InventoryLocationInventoryCount">
+          <End Type="dmlmModel.InventoryLocation" Role="InventoryLocation" Multiplicity="1" />
+          <End Type="dmlmModel.InventoryCount" Role="InventoryCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryLocation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryCount">
+              <PropertyRef Name="inventoryLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DefaultUOMUOM">
+          <End Type="dmlmModel.DefaultUOM" Role="DefaultUOM" Multiplicity="1" />
+          <End Type="dmlmModel.UOM" Role="UOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultUOM">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UOM">
+              <PropertyRef Name="defaultUOMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProviderProductCategory">
+          <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="dmlmModel.ProductCategory" Role="ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="serviceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dmlmModelStoreContainer" CdmEntityContainer="dmlmEntities">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="dmlmModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="contactRefNumber" ColumnName="contactRefNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactItems">
+            <EntityTypeMapping TypeName="dmlmModel.ContactItem">
+              <MappingFragment StoreEntitySet="ContactItem">
+                <ScalarProperty Name="contactId" ColumnName="contactId" />
+                <ScalarProperty Name="workingHoursEndTime" ColumnName="workingHoursEndTime" />
+                <ScalarProperty Name="workingHoursStartTime" ColumnName="workingHoursStartTime" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address3" ColumnName="address3" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="cellPhoneNumber" ColumnName="cellPhoneNumber" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="preferredContactType" ColumnName="preferredContactType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DefaultUOMs">
+            <EntityTypeMapping TypeName="dmlmModel.DefaultUOM">
+              <MappingFragment StoreEntitySet="DefaultUOM">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryCounts">
+            <EntityTypeMapping TypeName="dmlmModel.InventoryCount">
+              <MappingFragment StoreEntitySet="InventoryCount">
+                <ScalarProperty Name="uomId" ColumnName="uomId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+                <ScalarProperty Name="inventoryLocationId" ColumnName="inventoryLocationId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryLocations">
+            <EntityTypeMapping TypeName="dmlmModel.InventoryLocation">
+              <MappingFragment StoreEntitySet="InventoryLocation">
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="dmlmModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="locationCategoryId" ColumnName="locationCategoryId" />
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="operatingDays" ColumnName="operatingDays" />
+                <ScalarProperty Name="operatingHoursEnd" ColumnName="operatingHoursEnd" />
+                <ScalarProperty Name="operatingHoursStart" ColumnName="operatingHoursStart" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="googleMapMedium" ColumnName="googleMapMedium" />
+                <ScalarProperty Name="googleMapSmall" ColumnName="googleMapSmall" />
+                <ScalarProperty Name="zoneDescription" ColumnName="zoneDescription" />
+                <ScalarProperty Name="radius" ColumnName="radius" />
+                <ScalarProperty Name="long" ColumnName="long" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address3" ColumnName="address3" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationCategories">
+            <EntityTypeMapping TypeName="dmlmModel.LocationCategory">
+              <MappingFragment StoreEntitySet="LocationCategory">
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationContacts">
+            <EntityTypeMapping TypeName="dmlmModel.LocationContact">
+              <MappingFragment StoreEntitySet="LocationContact">
+                <ScalarProperty Name="isPrimaryContact" ColumnName="isPrimaryContact" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="contactId" ColumnName="contactId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="dmlmModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="contactPrimaryId" ColumnName="contactPrimaryId" />
+                <ScalarProperty Name="faxNumber" ColumnName="faxNumber" />
+                <ScalarProperty Name="businessPhoneNumber" ColumnName="businessPhoneNumber" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address3" ColumnName="address3" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="dmlmModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="productCategoryId" ColumnName="productCategoryId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="uomId" ColumnName="uomId" />
+                <ScalarProperty Name="manufacturerId" ColumnName="manufacturerId" />
+                <ScalarProperty Name="stockingCode" ColumnName="stockingCode" />
+                <ScalarProperty Name="partNumber" ColumnName="partNumber" />
+                <ScalarProperty Name="upc" ColumnName="upc" />
+                <ScalarProperty Name="urlProduct" ColumnName="urlProduct" />
+                <ScalarProperty Name="urlPrimaryImage" ColumnName="urlPrimaryImage" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="dmlmModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInventoryLocations">
+            <EntityTypeMapping TypeName="dmlmModel.ProductInventoryLocation">
+              <MappingFragment StoreEntitySet="ProductInventoryLocation">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="inventoryLocationId" ColumnName="inventoryLocationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="dmlmModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionLocations">
+            <EntityTypeMapping TypeName="dmlmModel.RegionLocation">
+              <MappingFragment StoreEntitySet="RegionLocation">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="regionId" ColumnName="regionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionUsers">
+            <EntityTypeMapping TypeName="dmlmModel.RegionUser">
+              <MappingFragment StoreEntitySet="RegionUser">
+                <ScalarProperty Name="isManager" ColumnName="isManager" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="regionId" ColumnName="regionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceProviders">
+            <EntityTypeMapping TypeName="dmlmModel.ServiceProvider">
+              <MappingFragment StoreEntitySet="ServiceProvider">
+                <ScalarProperty Name="businessPhoneNumber" ColumnName="businessPhoneNumber" />
+                <ScalarProperty Name="faxNumber" ColumnName="faxNumber" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="contactPrimaryId" ColumnName="contactPrimaryId" />
+                <ScalarProperty Name="googleMap" ColumnName="googleMap" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address3" ColumnName="address3" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Territories">
+            <EntityTypeMapping TypeName="dmlmModel.Territory">
+              <MappingFragment StoreEntitySet="Territory">
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOMs">
+            <EntityTypeMapping TypeName="dmlmModel.UOM">
+              <MappingFragment StoreEntitySet="UOM">
+                <ScalarProperty Name="defaultUOMId" ColumnName="defaultUOMId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="dmlmModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="cellPhoneNumber" ColumnName="cellPhoneNumber" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+                <ScalarProperty Name="employeeNumber" ColumnName="employeeNumber" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

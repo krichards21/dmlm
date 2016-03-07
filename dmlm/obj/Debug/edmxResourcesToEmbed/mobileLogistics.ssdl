@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dmlmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="contactRefNumber" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+    <Property Name="createDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ContactItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="preferredContactType" Type="bit" />
+    <Property Name="email" Type="varchar" MaxLength="150" />
+    <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="cellPhoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="address1" Type="varchar" MaxLength="50" />
+    <Property Name="address2" Type="varchar" MaxLength="50" />
+    <Property Name="address3" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="150" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="postalCode" Type="nchar" MaxLength="10" />
+    <Property Name="workingHoursStartTime" Type="time" Precision="7" />
+    <Property Name="workingHoursEndTime" Type="time" Precision="7" />
+    <Property Name="contactId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DefaultUOM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="InventoryCount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="count" Type="float" />
+    <Property Name="productId" Type="int" Nullable="false" />
+    <Property Name="inventoryLocationId" Type="int" Nullable="false" />
+    <Property Name="updateDate" Type="datetime" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="uomId" Type="int" />
+  </EntityType>
+  <EntityType Name="InventoryLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="locationId" Type="int" Nullable="false" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="updateDate" Type="datetime" />
+    <Property Name="endDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="address1" Type="varchar" MaxLength="50" />
+    <Property Name="address2" Type="varchar" MaxLength="50" />
+    <Property Name="address3" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="postalCode" Type="nchar" MaxLength="10" />
+    <Property Name="county" Type="varchar" MaxLength="50" />
+    <Property Name="latitude" Type="float" />
+    <Property Name="long" Type="float" />
+    <Property Name="radius" Type="float" />
+    <Property Name="zoneDescription" Type="varchar" MaxLength="50" />
+    <Property Name="googleMapSmall" Type="varchar" MaxLength="250" />
+    <Property Name="googleMapMedium" Type="varchar" MaxLength="250" />
+    <Property Name="url" Type="varchar" MaxLength="250" />
+    <Property Name="imageUrl" Type="varchar" MaxLength="50" />
+    <Property Name="operatingHoursStart" Type="time" Precision="7" />
+    <Property Name="operatingHoursEnd" Type="time" Precision="7" />
+    <Property Name="operatingDays" Type="varchar" MaxLength="50" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+    <Property Name="locationCategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LocationCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LocationContact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="locationId" Type="int" Nullable="false" />
+    <Property Name="contactId" Type="int" Nullable="false" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isPrimaryContact" Type="bit" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="address1" Type="varchar" MaxLength="50" />
+    <Property Name="address2" Type="varchar" MaxLength="50" />
+    <Property Name="address3" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="nchar" MaxLength="10" />
+    <Property Name="postalCode" Type="nchar" MaxLength="10" />
+    <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="businessPhoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="faxNumber" Type="nchar" MaxLength="10" />
+    <Property Name="contactPrimaryId" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="urlPrimaryImage" Type="varchar" MaxLength="250" />
+    <Property Name="urlProduct" Type="varchar" MaxLength="250" />
+    <Property Name="upc" Type="varchar" MaxLength="150" />
+    <Property Name="partNumber" Type="varchar" MaxLength="150" />
+    <Property Name="stockingCode" Type="varchar" MaxLength="50" />
+    <Property Name="manufacturerId" Type="int" Nullable="false" />
+    <Property Name="uomId" Type="int" Nullable="false" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+    <Property Name="updateDate" Type="datetime" />
+    <Property Name="endDate" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="productCategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="150" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductInventoryLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="inventoryLocationId" Type="int" Nullable="false" />
+    <Property Name="productId" Type="int" Nullable="false" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegionLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="regionId" Type="int" Nullable="false" />
+    <Property Name="locationId" Type="int" Nullable="false" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="RegionUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="regionId" Type="int" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isManager" Type="bit" />
+  </EntityType>
+  <EntityType Name="ServiceProvider">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="address1" Type="varchar" MaxLength="50" />
+    <Property Name="address2" Type="varchar" MaxLength="50" />
+    <Property Name="address3" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="varchar" MaxLength="50" />
+    <Property Name="postalCode" Type="varchar" MaxLength="50" />
+    <Property Name="googleMap" Type="varchar" MaxLength="250" />
+    <Property Name="contactPrimaryId" Type="int" />
+    <Property Name="organizationId" Type="int" Nullable="false" />
+    <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="faxNumber" Type="nchar" MaxLength="10" />
+    <Property Name="businessPhoneNumber" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Territory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UOM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="type" Type="nchar" MaxLength="10" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+    <Property Name="defaultUOMId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="employeeNumber" Type="varchar" MaxLength="50" />
+    <Property Name="emailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="cellPhoneNumber" Type="bit" />
+    <Property Name="isActive" Type="nchar" MaxLength="10" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="dmlmModelStoreContainer">
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactItem" EntityType="Self.ContactItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DefaultUOM" EntityType="Self.DefaultUOM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryCount" EntityType="Self.InventoryCount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryLocation" EntityType="Self.InventoryLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationCategory" EntityType="Self.LocationCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationContact" EntityType="Self.LocationContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductInventoryLocation" EntityType="Self.ProductInventoryLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegionLocation" EntityType="Self.RegionLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegionUser" EntityType="Self.RegionUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceProvider" EntityType="Self.ServiceProvider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

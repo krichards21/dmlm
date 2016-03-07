@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dmlmModelStoreContainer" CdmEntityContainer="dmlmEntities">
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="dmlmModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="contactRefNumber" ColumnName="contactRefNumber" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactItems">
+      <EntityTypeMapping TypeName="dmlmModel.ContactItem">
+        <MappingFragment StoreEntitySet="ContactItem">
+          <ScalarProperty Name="contactId" ColumnName="contactId" />
+          <ScalarProperty Name="workingHoursEndTime" ColumnName="workingHoursEndTime" />
+          <ScalarProperty Name="workingHoursStartTime" ColumnName="workingHoursStartTime" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address3" ColumnName="address3" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="cellPhoneNumber" ColumnName="cellPhoneNumber" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="preferredContactType" ColumnName="preferredContactType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DefaultUOMs">
+      <EntityTypeMapping TypeName="dmlmModel.DefaultUOM">
+        <MappingFragment StoreEntitySet="DefaultUOM">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryCounts">
+      <EntityTypeMapping TypeName="dmlmModel.InventoryCount">
+        <MappingFragment StoreEntitySet="InventoryCount">
+          <ScalarProperty Name="uomId" ColumnName="uomId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+          <ScalarProperty Name="inventoryLocationId" ColumnName="inventoryLocationId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryLocations">
+      <EntityTypeMapping TypeName="dmlmModel.InventoryLocation">
+        <MappingFragment StoreEntitySet="InventoryLocation">
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="dmlmModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="locationCategoryId" ColumnName="locationCategoryId" />
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="operatingDays" ColumnName="operatingDays" />
+          <ScalarProperty Name="operatingHoursEnd" ColumnName="operatingHoursEnd" />
+          <ScalarProperty Name="operatingHoursStart" ColumnName="operatingHoursStart" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="googleMapMedium" ColumnName="googleMapMedium" />
+          <ScalarProperty Name="googleMapSmall" ColumnName="googleMapSmall" />
+          <ScalarProperty Name="zoneDescription" ColumnName="zoneDescription" />
+          <ScalarProperty Name="radius" ColumnName="radius" />
+          <ScalarProperty Name="long" ColumnName="long" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="county" ColumnName="county" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address3" ColumnName="address3" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationCategories">
+      <EntityTypeMapping TypeName="dmlmModel.LocationCategory">
+        <MappingFragment StoreEntitySet="LocationCategory">
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationContacts">
+      <EntityTypeMapping TypeName="dmlmModel.LocationContact">
+        <MappingFragment StoreEntitySet="LocationContact">
+          <ScalarProperty Name="isPrimaryContact" ColumnName="isPrimaryContact" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="contactId" ColumnName="contactId" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organizations">
+      <EntityTypeMapping TypeName="dmlmModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="contactPrimaryId" ColumnName="contactPrimaryId" />
+          <ScalarProperty Name="faxNumber" ColumnName="faxNumber" />
+          <ScalarProperty Name="businessPhoneNumber" ColumnName="businessPhoneNumber" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address3" ColumnName="address3" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="dmlmModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="productCategoryId" ColumnName="productCategoryId" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="updateDate" ColumnName="updateDate" />
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="uomId" ColumnName="uomId" />
+          <ScalarProperty Name="manufacturerId" ColumnName="manufacturerId" />
+          <ScalarProperty Name="stockingCode" ColumnName="stockingCode" />
+          <ScalarProperty Name="partNumber" ColumnName="partNumber" />
+          <ScalarProperty Name="upc" ColumnName="upc" />
+          <ScalarProperty Name="urlProduct" ColumnName="urlProduct" />
+          <ScalarProperty Name="urlPrimaryImage" ColumnName="urlPrimaryImage" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCategories">
+      <EntityTypeMapping TypeName="dmlmModel.ProductCategory">
+        <MappingFragment StoreEntitySet="ProductCategory">
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductInventoryLocations">
+      <EntityTypeMapping TypeName="dmlmModel.ProductInventoryLocation">
+        <MappingFragment StoreEntitySet="ProductInventoryLocation">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="inventoryLocationId" ColumnName="inventoryLocationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="dmlmModel.Region">
+        <MappingFragment StoreEntitySet="Region">
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegionLocations">
+      <EntityTypeMapping TypeName="dmlmModel.RegionLocation">
+        <MappingFragment StoreEntitySet="RegionLocation">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="locationId" ColumnName="locationId" />
+          <ScalarProperty Name="regionId" ColumnName="regionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegionUsers">
+      <EntityTypeMapping TypeName="dmlmModel.RegionUser">
+        <MappingFragment StoreEntitySet="RegionUser">
+          <ScalarProperty Name="isManager" ColumnName="isManager" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="regionId" ColumnName="regionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceProviders">
+      <EntityTypeMapping TypeName="dmlmModel.ServiceProvider">
+        <MappingFragment StoreEntitySet="ServiceProvider">
+          <ScalarProperty Name="businessPhoneNumber" ColumnName="businessPhoneNumber" />
+          <ScalarProperty Name="faxNumber" ColumnName="faxNumber" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+          <ScalarProperty Name="contactPrimaryId" ColumnName="contactPrimaryId" />
+          <ScalarProperty Name="googleMap" ColumnName="googleMap" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address3" ColumnName="address3" />
+          <ScalarProperty Name="address2" ColumnName="address2" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Territories">
+      <EntityTypeMapping TypeName="dmlmModel.Territory">
+        <MappingFragment StoreEntitySet="Territory">
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UOMs">
+      <EntityTypeMapping TypeName="dmlmModel.UOM">
+        <MappingFragment StoreEntitySet="UOM">
+          <ScalarProperty Name="defaultUOMId" ColumnName="defaultUOMId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="dmlmModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="cellPhoneNumber" ColumnName="cellPhoneNumber" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="employeeNumber" ColumnName="employeeNumber" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
