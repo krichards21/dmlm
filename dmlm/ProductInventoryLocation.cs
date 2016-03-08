@@ -19,5 +19,8 @@ namespace dmlm
         public int productId { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public bool isActive { get; set; }
+    
+        public virtual InventoryLocation InventoryLocation { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

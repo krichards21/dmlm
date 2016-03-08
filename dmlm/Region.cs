@@ -18,6 +18,7 @@ namespace dmlm
         public Region()
         {
             this.RegionUsers = new HashSet<RegionUser>();
+            this.RegionLocations = new HashSet<RegionLocation>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace dmlm
         public virtual ServiceProvider ServiceProvider { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegionUser> RegionUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegionLocation> RegionLocations { get; set; }
     }
 }

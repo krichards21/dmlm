@@ -19,5 +19,8 @@ namespace dmlm
         public int locationId { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<bool> isActive { get; set; }
+    
+        public virtual Region Region { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

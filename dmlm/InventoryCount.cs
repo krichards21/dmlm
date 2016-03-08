@@ -25,5 +25,6 @@ namespace dmlm
         public virtual Product Product { get; set; }
         public virtual InventoryLocation InventoryLocation { get; set; }
         public virtual UOM UOM { get; set; }
+        public virtual User User { get; set; }
     }
 }

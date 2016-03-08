@@ -14,6 +14,12 @@ namespace dmlm
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.InventoryCounts = new HashSet<InventoryCount>();
+        }
+    
         public int Id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -25,5 +31,8 @@ namespace dmlm
         public string isActive { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public int serviceProviderId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InventoryCount> InventoryCounts { get; set; }
     }
 }

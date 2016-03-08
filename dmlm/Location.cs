@@ -19,6 +19,7 @@ namespace dmlm
         {
             this.LocationContacts = new HashSet<LocationContact>();
             this.InventoryLocations = new HashSet<InventoryLocation>();
+            this.RegionLocations = new HashSet<RegionLocation>();
         }
     
         public int Id { get; set; }
@@ -51,5 +52,7 @@ namespace dmlm
         public virtual ICollection<InventoryLocation> InventoryLocations { get; set; }
         public virtual LocationCategory LocationCategory { get; set; }
         public virtual ServiceProvider ServiceProvider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegionLocation> RegionLocations { get; set; }
     }
 }
