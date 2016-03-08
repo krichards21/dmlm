@@ -20,5 +20,7 @@ namespace dmlm
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<bool> isActive { get; set; }
         public Nullable<bool> isManager { get; set; }
+    
+        public virtual Region Region { get; set; }
     }
 }

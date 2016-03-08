@@ -18,5 +18,7 @@ namespace dmlm
         public string name { get; set; }
         public string description { get; set; }
         public int serviceProviderId { get; set; }
+    
+        public virtual ServiceProvider ServiceProvider { get; set; }
     }
 }

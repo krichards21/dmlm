@@ -14,6 +14,13 @@ namespace dmlm
     
     public partial class UOM
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UOM()
+        {
+            this.Products = new HashSet<Product>();
+            this.InventoryCounts = new HashSet<InventoryCount>();
+        }
+    
         public int Id { get; set; }
         public int serviceProviderId { get; set; }
         public string name { get; set; }
@@ -22,5 +29,10 @@ namespace dmlm
         public int defaultUOMId { get; set; }
     
         public virtual DefaultUOM DefaultUOM { get; set; }
+        public virtual ServiceProvider ServiceProvider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InventoryCount> InventoryCounts { get; set; }
     }
 }

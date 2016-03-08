@@ -50,7 +50,7 @@
     <Property Name="inventoryLocationId" Type="int" Nullable="false" />
     <Property Name="updateDate" Type="datetime" />
     <Property Name="userId" Type="int" Nullable="false" />
-    <Property Name="uomId" Type="int" />
+    <Property Name="uomId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="InventoryLocation">
     <Key>

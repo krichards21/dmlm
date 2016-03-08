@@ -50,5 +50,6 @@ namespace dmlm
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventoryLocation> InventoryLocations { get; set; }
         public virtual LocationCategory LocationCategory { get; set; }
+        public virtual ServiceProvider ServiceProvider { get; set; }
     }
 }

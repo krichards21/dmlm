@@ -37,6 +37,12 @@
         <AssociationConnector Association="dmlmModel.InventoryLocationInventoryCount" />
         <AssociationConnector Association="dmlmModel.DefaultUOMUOM" />
         <AssociationConnector Association="dmlmModel.ServiceProviderProductCategory" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderTerritory" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderUOM" />
+        <AssociationConnector Association="dmlmModel.UOMProduct" />
+        <AssociationConnector Association="dmlmModel.RegionRegionUser" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderLocation" />
+        <AssociationConnector Association="dmlmModel.UOMInventoryCount" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

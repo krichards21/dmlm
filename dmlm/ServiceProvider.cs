@@ -20,6 +20,9 @@ namespace dmlm
             this.Regions = new HashSet<Region>();
             this.Contacts = new HashSet<Contact>();
             this.ProductCategories = new HashSet<ProductCategory>();
+            this.Territories = new HashSet<Territory>();
+            this.UOMs = new HashSet<UOM>();
+            this.Locations = new HashSet<Location>();
         }
     
         public int Id { get; set; }
@@ -44,5 +47,11 @@ namespace dmlm
         public virtual ICollection<Contact> Contacts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Territory> Territories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UOM> UOMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Location> Locations { get; set; }
     }
 }

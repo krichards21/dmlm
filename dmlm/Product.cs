@@ -40,5 +40,6 @@ namespace dmlm
         public virtual ProductCategory ProductCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventoryCount> InventoryCounts { get; set; }
+        public virtual UOM UOM { get; set; }
     }
 }

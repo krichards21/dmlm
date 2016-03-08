@@ -14,11 +14,19 @@ namespace dmlm
     
     public partial class Region
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Region()
+        {
+            this.RegionUsers = new HashSet<RegionUser>();
+        }
+    
         public int Id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public int serviceProviderId { get; set; }
     
         public virtual ServiceProvider ServiceProvider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegionUser> RegionUsers { get; set; }
     }
 }

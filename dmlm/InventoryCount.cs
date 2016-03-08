@@ -20,9 +20,10 @@ namespace dmlm
         public int inventoryLocationId { get; set; }
         public Nullable<System.DateTime> updateDate { get; set; }
         public int userId { get; set; }
-        public Nullable<int> uomId { get; set; }
+        public int uomId { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual InventoryLocation InventoryLocation { get; set; }
+        public virtual UOM UOM { get; set; }
     }
 }
