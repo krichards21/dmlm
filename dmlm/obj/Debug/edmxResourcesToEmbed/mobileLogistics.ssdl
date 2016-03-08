@@ -249,8 +249,8 @@
     <Property Name="employeeNumber" Type="varchar" MaxLength="50" />
     <Property Name="emailAddress" Type="varchar" MaxLength="50" />
     <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
-    <Property Name="cellPhoneNumber" Type="bit" />
-    <Property Name="isActive" Type="nchar" MaxLength="10" />
+    <Property Name="cellPhoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="isActive" Type="bit" />
     <Property Name="createDate" Type="datetime" />
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
   </EntityType>

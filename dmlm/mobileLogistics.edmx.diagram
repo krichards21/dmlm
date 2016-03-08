@@ -8,10 +8,10 @@
         <EntityTypeShape EntityType="dmlmModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.ContactItem" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.DefaultUOM" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dmlmModel.InventoryCount" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dmlmModel.InventoryCount" Width="1.5" PointX="4.5" PointY="3.25" />
         <EntityTypeShape EntityType="dmlmModel.InventoryLocation" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="dmlmModel.Location" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dmlmModel.LocationCategory" Width="1.5" PointX="6.75" PointY="7.25" />
+        <EntityTypeShape EntityType="dmlmModel.LocationCategory" Width="1.5" PointX="6.75" PointY="7.875" />
         <EntityTypeShape EntityType="dmlmModel.LocationContact" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="dmlmModel.Organization" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.Product" Width="1.5" PointX="8.75" PointY="5.75" />
@@ -21,8 +21,8 @@
         <EntityTypeShape EntityType="dmlmModel.RegionLocation" Width="1.5" PointX="10.75" PointY="3.75" />
         <EntityTypeShape EntityType="dmlmModel.RegionUser" Width="1.5" PointX="12.375" PointY="5.75" />
         <EntityTypeShape EntityType="dmlmModel.ServiceProvider" Width="1.5" PointX="6.75" PointY="10.75" />
-        <EntityTypeShape EntityType="dmlmModel.Territory" Width="1.5" PointX="8.75" PointY="10.75" />
-        <EntityTypeShape EntityType="dmlmModel.UOM" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dmlmModel.Territory" Width="1.5" PointX="8.75" PointY="11.375" />
+        <EntityTypeShape EntityType="dmlmModel.UOM" Width="1.5" PointX="10.625" PointY="7.625" />
         <EntityTypeShape EntityType="dmlmModel.User" Width="1.5" PointX="12.75" PointY="0.75" />
         <AssociationConnector Association="dmlmModel.OrganizationServiceProvider" />
         <AssociationConnector Association="dmlmModel.ServiceProviderRegion" />
@@ -48,6 +48,9 @@
         <AssociationConnector Association="dmlmModel.ProductProductInventoryLocation" />
         <AssociationConnector Association="dmlmModel.RegionRegionLocation" />
         <AssociationConnector Association="dmlmModel.LocationRegionLocation" />
+        <AssociationConnector Association="dmlmModel.TerritoryRegion" />
+        <EntityTypeShape EntityType="dmlmModel.Manufacturer" Width="1.5" PointX="11.375" PointY="11.75" />
+        <AssociationConnector Association="dmlmModel.ManufacturerProduct" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

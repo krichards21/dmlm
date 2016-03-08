@@ -96,6 +96,26 @@
       <End Role="UOM" EntitySet="UOMs" />
       <End Role="InventoryCount" EntitySet="InventoryCounts" />
     </AssociationSet>
+    <AssociationSet Name="UserInventoryCount" Association="dmlmModel.UserInventoryCount">
+      <End Role="User" EntitySet="Users" />
+      <End Role="InventoryCount" EntitySet="InventoryCounts" />
+    </AssociationSet>
+    <AssociationSet Name="InventoryLocationProductInventoryLocation" Association="dmlmModel.InventoryLocationProductInventoryLocation">
+      <End Role="InventoryLocation" EntitySet="InventoryLocations" />
+      <End Role="ProductInventoryLocation" EntitySet="ProductInventoryLocations" />
+    </AssociationSet>
+    <AssociationSet Name="ProductProductInventoryLocation" Association="dmlmModel.ProductProductInventoryLocation">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductInventoryLocation" EntitySet="ProductInventoryLocations" />
+    </AssociationSet>
+    <AssociationSet Name="RegionRegionLocation" Association="dmlmModel.RegionRegionLocation">
+      <End Role="Region" EntitySet="Regions" />
+      <End Role="RegionLocation" EntitySet="RegionLocations" />
+    </AssociationSet>
+    <AssociationSet Name="LocationRegionLocation" Association="dmlmModel.LocationRegionLocation">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="RegionLocation" EntitySet="RegionLocations" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contact">
     <Key>
@@ -156,6 +176,7 @@
     <NavigationProperty Name="Product" Relationship="dmlmModel.ProductInventoryCount" FromRole="InventoryCount" ToRole="Product" />
     <NavigationProperty Name="InventoryLocation" Relationship="dmlmModel.InventoryLocationInventoryCount" FromRole="InventoryCount" ToRole="InventoryLocation" />
     <NavigationProperty Name="UOM" Relationship="dmlmModel.UOMInventoryCount" FromRole="InventoryCount" ToRole="UOM" />
+    <NavigationProperty Name="User" Relationship="dmlmModel.UserInventoryCount" FromRole="InventoryCount" ToRole="User" />
   </EntityType>
   <EntityType Name="InventoryLocation">
     <Key>
@@ -171,6 +192,7 @@
     <Property Name="endDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Location" Relationship="dmlmModel.LocationInventoryLocation" FromRole="InventoryLocation" ToRole="Location" />
     <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.InventoryLocationInventoryCount" FromRole="InventoryLocation" ToRole="InventoryCount" />
+    <NavigationProperty Name="ProductInventoryLocations" Relationship="dmlmModel.InventoryLocationProductInventoryLocation" FromRole="InventoryLocation" ToRole="ProductInventoryLocation" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -203,6 +225,7 @@
     <Property Name="locationCategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="LocationCategory" Relationship="dmlmModel.LocationCategoryLocation" FromRole="Location" ToRole="LocationCategory" />
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderLocation" FromRole="Location" ToRole="ServiceProvider" />
+    <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.LocationRegionLocation" FromRole="Location" ToRole="RegionLocation" />
   </EntityType>
   <EntityType Name="LocationCategory">
     <Key>
@@ -267,6 +290,7 @@
     <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.ProductInventoryCount" FromRole="Product" ToRole="InventoryCount" />
     <Property Name="productCategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="UOM" Relationship="dmlmModel.UOMProduct" FromRole="Product" ToRole="UOM" />
+    <NavigationProperty Name="ProductInventoryLocations" Relationship="dmlmModel.ProductProductInventoryLocation" FromRole="Product" ToRole="ProductInventoryLocation" />
   </EntityType>
   <EntityType Name="ProductCategory">
     <Key>
@@ -288,6 +312,8 @@
     <Property Name="productId" Type="Int32" Nullable="false" />
     <Property Name="createDate" Type="DateTime" Precision="3" />
     <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="InventoryLocation" Relationship="dmlmModel.InventoryLocationProductInventoryLocation" FromRole="ProductInventoryLocation" ToRole="InventoryLocation" />
+    <NavigationProperty Name="Product" Relationship="dmlmModel.ProductProductInventoryLocation" FromRole="ProductInventoryLocation" ToRole="Product" />
   </EntityType>
   <EntityType Name="Region">
     <Key>
@@ -299,6 +325,7 @@
     <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderRegion" FromRole="Region" ToRole="ServiceProvider" />
     <NavigationProperty Name="RegionUsers" Relationship="dmlmModel.RegionRegionUser" FromRole="Region" ToRole="RegionUser" />
+    <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.RegionRegionLocation" FromRole="Region" ToRole="RegionLocation" />
   </EntityType>
   <EntityType Name="RegionLocation">
     <Key>
@@ -309,6 +336,8 @@
     <Property Name="locationId" Type="Int32" Nullable="false" />
     <Property Name="createDate" Type="DateTime" Precision="3" />
     <Property Name="isActive" Type="Boolean" />
+    <NavigationProperty Name="Region" Relationship="dmlmModel.RegionRegionLocation" FromRole="RegionLocation" ToRole="Region" />
+    <NavigationProperty Name="Location" Relationship="dmlmModel.LocationRegionLocation" FromRole="RegionLocation" ToRole="Location" />
   </EntityType>
   <EntityType Name="RegionUser">
     <Key>
@@ -384,10 +413,11 @@
     <Property Name="employeeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="emailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="cellPhoneNumber" Type="Boolean" />
-    <Property Name="isActive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="cellPhoneNumber" Type="String" />
+    <Property Name="isActive" Type="Boolean" />
     <Property Name="createDate" Type="DateTime" Precision="3" />
     <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
   </EntityType>
   <Association Name="OrganizationServiceProvider">
     <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -614,6 +644,66 @@
       </Principal>
       <Dependent Role="InventoryCount">
         <PropertyRef Name="uomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserInventoryCount">
+    <End Type="dmlmModel.User" Role="User" Multiplicity="1" />
+    <End Type="dmlmModel.InventoryCount" Role="InventoryCount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryCount">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="InventoryLocationProductInventoryLocation">
+    <End Type="dmlmModel.InventoryLocation" Role="InventoryLocation" Multiplicity="1" />
+    <End Type="dmlmModel.ProductInventoryLocation" Role="ProductInventoryLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryLocation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductInventoryLocation">
+        <PropertyRef Name="inventoryLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductProductInventoryLocation">
+    <End Type="dmlmModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="dmlmModel.ProductInventoryLocation" Role="ProductInventoryLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductInventoryLocation">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegionRegionLocation">
+    <End Type="dmlmModel.Region" Role="Region" Multiplicity="1" />
+    <End Type="dmlmModel.RegionLocation" Role="RegionLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegionLocation">
+        <PropertyRef Name="regionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LocationRegionLocation">
+    <End Type="dmlmModel.Location" Role="Location" Multiplicity="1" />
+    <End Type="dmlmModel.RegionLocation" Role="RegionLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegionLocation">
+        <PropertyRef Name="locationId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

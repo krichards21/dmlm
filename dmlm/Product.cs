@@ -44,5 +44,6 @@ namespace dmlm
         public virtual UOM UOM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductInventoryLocation> ProductInventoryLocations { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
     }
 }

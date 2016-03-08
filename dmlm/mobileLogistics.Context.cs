@@ -44,5 +44,6 @@ namespace dmlm
         public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Manufacturer> Manufacturers { get; set; }
     }
 }

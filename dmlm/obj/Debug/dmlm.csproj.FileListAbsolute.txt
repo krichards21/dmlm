@@ -79,3 +79,10 @@ C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\Microsoft
 C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\obj\Debug\dmlm.dll
 C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\obj\Debug\dmlm.pdb
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Net.Http.Formatting.dll
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.dll
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.WebHost.dll
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Net.Http.Formatting.xml
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.xml
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.WebHost.xml
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\obj\Debug\dmlm.csprojResolveAssemblyReference.cache

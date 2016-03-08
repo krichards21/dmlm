@@ -27,8 +27,8 @@ namespace dmlm
         public string employeeNumber { get; set; }
         public string emailAddress { get; set; }
         public string phoneNumber { get; set; }
-        public Nullable<bool> cellPhoneNumber { get; set; }
-        public string isActive { get; set; }
+        public string cellPhoneNumber { get; set; }
+        public Nullable<bool> isActive { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public int serviceProviderId { get; set; }
     
