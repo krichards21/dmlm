@@ -12,19 +12,38 @@ using dmlm;
 
 namespace dmlm.Controllers
 {
+    [RoutePrefix("Location")]
     public class LocationsController : ApiController
     {
+        private Models.LocationModel locationModel = new Models.LocationModel();
         private dmlmEntities db = new dmlmEntities();
 
         // GET: api/Locations
-        public IQueryable<Location> GetLocations()
+        [ResponseType(typeof(Models.LocationModel.Location))]
+        [Route("GetLocations")]
+        public IHttpActionResult GetLocations()
         {
-            return db.Locations;
+            return Ok(locationModel.GetLocations(1));
         }
 
         // GET: api/Locations/5
-        [ResponseType(typeof(Location))]
+        [ResponseType(typeof(Models.LocationModel.Location))]
+        [Route("GetLocation/{id:int}")]
         public IHttpActionResult GetLocation(int id)
+        {
+            var location = locationModel.GetLocation(1, id);
+            if (location == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(location);
+        }
+
+        // GET: api/Locations/5
+        [ResponseType(typeof(Models.LocationModel.Location))]
+        [Route("GetLocation/{id:int}/{regionid:int}")]
+        public IHttpActionResult GetLocationByRegion(int id, int regionid)
         {
             Location location = db.Locations.Find(id);
             if (location == null)

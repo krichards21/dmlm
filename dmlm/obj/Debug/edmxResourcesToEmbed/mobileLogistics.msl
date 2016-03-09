@@ -185,6 +185,7 @@
     <EntitySetMapping Name="Regions">
       <EntityTypeMapping TypeName="dmlmModel.Region">
         <MappingFragment StoreEntitySet="Region">
+          <ScalarProperty Name="territoryId" ColumnName="territoryId" />
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -270,6 +271,16 @@
           <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="dmlmModel.Manufacturer">
+        <MappingFragment StoreEntitySet="Manufacturer">
+          <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

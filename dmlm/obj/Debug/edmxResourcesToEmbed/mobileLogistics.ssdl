@@ -70,12 +70,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="150" />
     <Property Name="description" Type="varchar" MaxLength="250" />
-    <Property Name="address1" Type="varchar" MaxLength="50" />
-    <Property Name="address2" Type="varchar" MaxLength="50" />
+    <Property Name="address1" Type="varchar" MaxLength="250" />
+    <Property Name="address2" Type="varchar" MaxLength="250" />
     <Property Name="address3" Type="varchar" MaxLength="50" />
-    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="250" />
     <Property Name="state" Type="varchar" MaxLength="50" />
     <Property Name="postalCode" Type="nchar" MaxLength="10" />
     <Property Name="county" Type="varchar" MaxLength="50" />
@@ -83,10 +83,10 @@
     <Property Name="long" Type="float" />
     <Property Name="radius" Type="float" />
     <Property Name="zoneDescription" Type="varchar" MaxLength="50" />
-    <Property Name="googleMapSmall" Type="varchar" MaxLength="250" />
-    <Property Name="googleMapMedium" Type="varchar" MaxLength="250" />
-    <Property Name="url" Type="varchar" MaxLength="250" />
-    <Property Name="imageUrl" Type="varchar" MaxLength="50" />
+    <Property Name="googleMapSmall" Type="varchar(max)" />
+    <Property Name="googleMapMedium" Type="varchar(max)" />
+    <Property Name="url" Type="varchar(max)" />
+    <Property Name="imageUrl" Type="varchar(max)" />
     <Property Name="operatingHoursStart" Type="time" Precision="7" />
     <Property Name="operatingHoursEnd" Type="time" Precision="7" />
     <Property Name="operatingDays" Type="varchar" MaxLength="50" />
@@ -111,6 +111,15 @@
     <Property Name="createDate" Type="datetime" />
     <Property Name="isActive" Type="bit" />
     <Property Name="isPrimaryContact" Type="bit" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="serviceProviderId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Organization">
     <Key>
@@ -177,6 +186,7 @@
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="description" Type="varchar" MaxLength="250" />
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
+    <Property Name="territoryId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RegionLocation">
     <Key>
@@ -263,6 +273,7 @@
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LocationCategory" EntityType="Self.LocationCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LocationContact" EntityType="Self.LocationContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />

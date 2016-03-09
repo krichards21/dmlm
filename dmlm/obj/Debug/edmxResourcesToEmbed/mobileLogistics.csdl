@@ -116,6 +116,15 @@
       <End Role="Location" EntitySet="Locations" />
       <End Role="RegionLocation" EntitySet="RegionLocations" />
     </AssociationSet>
+    <AssociationSet Name="TerritoryRegion" Association="dmlmModel.TerritoryRegion">
+      <End Role="Territory" EntitySet="Territories" />
+      <End Role="Region" EntitySet="Regions" />
+    </AssociationSet>
+    <EntitySet Name="Manufacturers" EntityType="dmlmModel.Manufacturer" />
+    <AssociationSet Name="ManufacturerProduct" Association="dmlmModel.ManufacturerProduct">
+      <End Role="Manufacturer" EntitySet="Manufacturers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contact">
     <Key>
@@ -199,12 +208,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="address2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -212,10 +221,10 @@
     <Property Name="long" Type="Double" />
     <Property Name="radius" Type="Double" />
     <Property Name="zoneDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="googleMapSmall" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="googleMapMedium" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="googleMapSmall" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="googleMapMedium" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="imageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="operatingHoursStart" Type="Time" Precision="7" />
     <Property Name="operatingHoursEnd" Type="Time" Precision="7" />
     <Property Name="operatingDays" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -291,6 +300,7 @@
     <Property Name="productCategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="UOM" Relationship="dmlmModel.UOMProduct" FromRole="Product" ToRole="UOM" />
     <NavigationProperty Name="ProductInventoryLocations" Relationship="dmlmModel.ProductProductInventoryLocation" FromRole="Product" ToRole="ProductInventoryLocation" />
+    <NavigationProperty Name="Manufacturer" Relationship="dmlmModel.ManufacturerProduct" FromRole="Product" ToRole="Manufacturer" />
   </EntityType>
   <EntityType Name="ProductCategory">
     <Key>
@@ -326,6 +336,8 @@
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderRegion" FromRole="Region" ToRole="ServiceProvider" />
     <NavigationProperty Name="RegionUsers" Relationship="dmlmModel.RegionRegionUser" FromRole="Region" ToRole="RegionUser" />
     <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.RegionRegionLocation" FromRole="Region" ToRole="RegionLocation" />
+    <Property Name="territoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Territory" Relationship="dmlmModel.TerritoryRegion" FromRole="Region" ToRole="Territory" />
   </EntityType>
   <EntityType Name="RegionLocation">
     <Key>
@@ -386,6 +398,7 @@
     <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderTerritory" FromRole="Territory" ToRole="ServiceProvider" />
+    <NavigationProperty Name="Regions" Relationship="dmlmModel.TerritoryRegion" FromRole="Territory" ToRole="Region" />
   </EntityType>
   <EntityType Name="UOM">
     <Key>
@@ -413,7 +426,7 @@
     <Property Name="employeeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="emailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="cellPhoneNumber" Type="String" />
+    <Property Name="cellPhoneNumber" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
     <Property Name="isActive" Type="Boolean" />
     <Property Name="createDate" Type="DateTime" Precision="3" />
     <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
@@ -704,6 +717,40 @@
       </Principal>
       <Dependent Role="RegionLocation">
         <PropertyRef Name="locationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TerritoryRegion">
+    <End Type="dmlmModel.Territory" Role="Territory" Multiplicity="1" />
+    <End Type="dmlmModel.Region" Role="Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Territory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Region">
+        <PropertyRef Name="territoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="dmlmModel.ManufacturerProduct" FromRole="Manufacturer" ToRole="Product" />
+  </EntityType>
+  <Association Name="ManufacturerProduct">
+    <End Type="dmlmModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
+    <End Type="dmlmModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="manufacturerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
