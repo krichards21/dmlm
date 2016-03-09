@@ -14,6 +14,7 @@ namespace dmlm.Controllers
 {
     public class ProductsController : ApiController
     {
+        private Models.ProductModel productModel = new Models.ProductModel();
         private dmlmEntities db = new dmlmEntities();
 
         // GET: api/Products

@@ -264,6 +264,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Organization.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>

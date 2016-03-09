@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace dmlm
@@ -16,6 +17,8 @@ namespace dmlm
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Formatters.JsonFormatter.AddUriPathExtensionMapping("json", "application/json");
+            config.Formatters.XmlFormatter.AddUriPathExtensionMapping("xml", "text/xml");
         }
     }
 }
