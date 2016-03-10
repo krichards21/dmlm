@@ -12,15 +12,18 @@ using dmlm;
 
 namespace dmlm.Controllers
 {
+    [RoutePrefix("Product")]
     public class ProductsController : ApiController
     {
         private Models.ProductModel productModel = new Models.ProductModel();
         private dmlmEntities db = new dmlmEntities();
 
         // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        [ResponseType(typeof(Models.ProductModel.Product))]
+        [Route("GetProducts")]
+        public IHttpActionResult GetProducts()
         {
-            return db.Products;
+            return Ok(productModel.GetProducts(1));
         }
 
         // GET: api/Products/5

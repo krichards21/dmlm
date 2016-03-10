@@ -51,6 +51,7 @@ namespace dmlm.Models
             }
         }
 
+
         public List<Location> GetLocations(int serviceProviderID)
         {
             using (dmlmEntities db = new dmlmEntities())

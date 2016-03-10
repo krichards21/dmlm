@@ -16,9 +16,24 @@ namespace dmlm.Models
             public string ProductDescription { get; set; }
         }
 
-        public Product GetProduct(int serviceProviderID)
+        public List<Product> GetProducts(int serviceProviderID)
         {
-            return new Product();
+            using (dmlmEntities db = new dmlmEntities())
+            {
+                var products = new List<Product>();
+                var productEntity = db.Products.Where(l => l.serviceProviderId == serviceProviderID);
+                foreach(var product in productEntity)
+                {
+                    products.Add(new Product
+                    {
+                        ProductName = product.name,
+                        ProductDescription = product.description,
+                        ProductID = product.Id,
+                        UOM = product.UOM
+                    });
+                }
+                return products;
+            }
         }
     }
 }
