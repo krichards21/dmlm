@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using dmlm;
+using dmlm.Models;
 
 namespace dmlm.Controllers
 {
@@ -16,6 +17,7 @@ namespace dmlm.Controllers
     public class LocationsController : ApiController
     {
         private Models.LocationModel locationModel = new Models.LocationModel();
+        private Models.InventoryLocationsModel InventoryLocationModel = new Models.InventoryLocationsModel();
         private dmlmEntities db = new dmlmEntities();
 
         // GET: api/Locations
@@ -52,6 +54,21 @@ namespace dmlm.Controllers
             }
 
             return Ok(location);
+        }
+
+        // GET: /Location/GetInventoryCount
+        [ResponseType(typeof(LocationProductCounts))]
+        [Route("GetInventoryCount/{id:int}/{locationid:int}")]
+        public IHttpActionResult GetInventoryCount(int id, int locationid)
+        {
+            var locationCounts = 
+                InventoryLocationModel.GetInventoryCountsByLocation(locationid);
+            if (locationCounts == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(locationCounts);
         }
 
         // PUT: api/Locations/5
