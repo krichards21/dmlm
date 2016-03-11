@@ -80,3 +80,9 @@ c:\users\krichards\documents\visual studio 2015\Projects\dmlm\dmlm\bin\Microsoft
 c:\users\krichards\documents\visual studio 2015\Projects\dmlm\dmlm\obj\Release\dmlm.csprojResolveAssemblyReference.cache
 c:\users\krichards\documents\visual studio 2015\Projects\dmlm\dmlm\obj\Release\dmlm.dll
 c:\users\krichards\documents\visual studio 2015\Projects\dmlm\dmlm\obj\Release\dmlm.pdb
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Net.Http.Formatting.dll
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.dll
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.WebHost.dll
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Net.Http.Formatting.xml
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.xml
+C:\Users\krichards\Documents\Visual Studio 2015\Projects\dmlm\dmlm\bin\System.Web.Http.WebHost.xml

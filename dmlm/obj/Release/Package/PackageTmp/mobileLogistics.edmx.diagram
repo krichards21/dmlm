@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aadfd94606aa402390e33cc3d50a1f17" Name="Diagram1" ZoomLevel="61">
+        <EntityTypeShape EntityType="dmlmModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dmlmModel.ContactItem" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dmlmModel.DefaultUOM" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dmlmModel.InventoryCount" Width="1.5" PointX="4.5" PointY="3.25" />
+        <EntityTypeShape EntityType="dmlmModel.InventoryLocation" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dmlmModel.Location" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dmlmModel.LocationCategory" Width="1.5" PointX="6.75" PointY="7.875" />
+        <EntityTypeShape EntityType="dmlmModel.LocationContact" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="dmlmModel.Organization" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dmlmModel.Product" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dmlmModel.ProductCategory" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dmlmModel.ProductInventoryLocation" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dmlmModel.Region" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="dmlmModel.RegionLocation" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dmlmModel.RegionUser" Width="1.5" PointX="12.375" PointY="5.75" />
+        <EntityTypeShape EntityType="dmlmModel.ServiceProvider" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="dmlmModel.Territory" Width="1.5" PointX="8.75" PointY="11.375" />
+        <EntityTypeShape EntityType="dmlmModel.UOM" Width="1.5" PointX="10.625" PointY="7.625" />
+        <EntityTypeShape EntityType="dmlmModel.User" Width="1.5" PointX="12.75" PointY="0.75" />
+        <AssociationConnector Association="dmlmModel.OrganizationServiceProvider" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderRegion" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderContact" />
+        <AssociationConnector Association="dmlmModel.ContactContactItem" />
+        <AssociationConnector Association="dmlmModel.ContactLocationContact" />
+        <AssociationConnector Association="dmlmModel.LocationLocationContact" />
+        <AssociationConnector Association="dmlmModel.LocationInventoryLocation" />
+        <AssociationConnector Association="dmlmModel.LocationCategoryLocation" />
+        <AssociationConnector Association="dmlmModel.ProductCategoryProduct" />
+        <AssociationConnector Association="dmlmModel.ProductInventoryCount" />
+        <AssociationConnector Association="dmlmModel.InventoryLocationInventoryCount" />
+        <AssociationConnector Association="dmlmModel.DefaultUOMUOM" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderProductCategory" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderTerritory" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderUOM" />
+        <AssociationConnector Association="dmlmModel.UOMProduct" />
+        <AssociationConnector Association="dmlmModel.RegionRegionUser" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderLocation" />
+        <AssociationConnector Association="dmlmModel.UOMInventoryCount" />
+        <AssociationConnector Association="dmlmModel.UserInventoryCount" />
+        <AssociationConnector Association="dmlmModel.InventoryLocationProductInventoryLocation" />
+        <AssociationConnector Association="dmlmModel.ProductProductInventoryLocation" />
+        <AssociationConnector Association="dmlmModel.RegionRegionLocation" />
+        <AssociationConnector Association="dmlmModel.LocationRegionLocation" />
+        <AssociationConnector Association="dmlmModel.TerritoryRegion" />
+        <EntityTypeShape EntityType="dmlmModel.Manufacturer" Width="1.5" PointX="11.375" PointY="11.75" />
+        <AssociationConnector Association="dmlmModel.ManufacturerProduct" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

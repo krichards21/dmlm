@@ -70,6 +70,7 @@ namespace dmlm.Models
                             Address3 = location.address3,
                             City = location.city,
                             State = location.state,
+                            PostalCode = location.postalCode,
                             GoogleMapSmall = location.googleMapSmall,
                             GoogleMapMedium = location.googleMapMedium,
                             HourStart = location.operatingHoursStart,
