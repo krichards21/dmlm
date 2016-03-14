@@ -23,6 +23,7 @@ namespace dmlm.Models
             public TimeSpan? HourEnd { get; set; }
             public string GoogleMapSmall { get; set; }
             public string GoogleMapMedium { get; set; }
+            public string ImageURL { get; set; }
         }
 
         public Location GetLocation(int serviceProviderID, int locationID)
@@ -76,7 +77,8 @@ namespace dmlm.Models
                             HourStart = location.operatingHoursStart,
                             HourEnd = location.operatingHoursEnd,
                             DaysOpen = location.operatingDays,
-                            LocationName = location.name
+                            LocationName = location.name,
+                            ImageURL = location.imageUrl
                         });
                 }
 
@@ -110,7 +112,8 @@ namespace dmlm.Models
                                 HourStart = location.operatingHoursStart,
                                 HourEnd = location.operatingHoursEnd,
                                 DaysOpen = location.operatingDays,
-                                LocationName = location.name
+                                LocationName = location.name,
+                                ImageURL = location.imageUrl
                             });
                     }
                 }

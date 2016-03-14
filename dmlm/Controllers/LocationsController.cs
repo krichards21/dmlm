@@ -25,6 +25,10 @@ namespace dmlm.Controllers
         [Route("GetLocations")]
         public IHttpActionResult GetLocations()
         {
+            //var serviceProviderID = 0;
+            //var userID = 0;
+            //int.TryParse(Request.Headers.GetValues("ServiceProviderID").First(), out serviceProviderID);
+            //int.TryParse(Request.Headers.GetValues("UserID").First(), out userID);
             return Ok(locationModel.GetLocations(1));
         }
 
@@ -33,7 +37,11 @@ namespace dmlm.Controllers
         [Route("GetLocation/{id:int}")]
         public IHttpActionResult GetLocation(int id)
         {
-            var location = locationModel.GetLocation(1, id);
+            var serviceProviderID = 0;
+            var userID = 0;
+            int.TryParse(Request.Headers.GetValues("ServiceProviderID").First(), out serviceProviderID);
+            int.TryParse(Request.Headers.GetValues("UserID").First(), out userID);
+            var location = locationModel.GetLocation(serviceProviderID, id);
             if (location == null)
             {
                 return NotFound();
