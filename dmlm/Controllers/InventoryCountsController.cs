@@ -20,6 +20,7 @@ namespace dmlm.Controllers
         private Models.InventoryCountModel inventoryCountModel = new Models.InventoryCountModel();
 
         // GET: api/InventoryCounts
+        [Route("GetInventory")]
         public IQueryable<InventoryCount> GetInventoryCounts()
         {
             return db.InventoryCounts;
