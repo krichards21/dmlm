@@ -23,11 +23,11 @@ namespace dmlm.Controllers
         [Route("GetProducts")]
         public IHttpActionResult GetProducts()
         {
-            var serviceProviderID = 0;
-            var userID = 0;
-            int.TryParse(Request.Headers.GetValues("ServiceProviderID").First(), out serviceProviderID);
-            int.TryParse(Request.Headers.GetValues("UserID").First(), out userID);
-            return Ok(productModel.GetProducts(serviceProviderID));
+            //var serviceProviderID = 0;
+            //var userID = 0;
+            //int.TryParse(Request.Headers.GetValues("ServiceProviderID").First(), out serviceProviderID);
+            //int.TryParse(Request.Headers.GetValues("UserID").First(), out userID);
+            return Ok(productModel.GetProducts(1));
         }
 
         // GET: api/Products/5
