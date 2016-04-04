@@ -17,6 +17,9 @@
     <EntitySetMapping Name="ContactItems">
       <EntityTypeMapping TypeName="dmlmModel.ContactItem">
         <MappingFragment StoreEntitySet="ContactItem">
+          <ScalarProperty Name="preferredContactPhone" ColumnName="preferredContactPhone" />
+          <ScalarProperty Name="prefrredContactCell" ColumnName="prefrredContactCell" />
+          <ScalarProperty Name="preferredContactEmail" ColumnName="preferredContactEmail" />
           <ScalarProperty Name="contactId" ColumnName="contactId" />
           <ScalarProperty Name="workingHoursEndTime" ColumnName="workingHoursEndTime" />
           <ScalarProperty Name="workingHoursStartTime" ColumnName="workingHoursStartTime" />
@@ -29,7 +32,6 @@
           <ScalarProperty Name="cellPhoneNumber" ColumnName="cellPhoneNumber" />
           <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
           <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="preferredContactType" ColumnName="preferredContactType" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -74,6 +76,7 @@
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="dmlmModel.Location">
         <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="locationCategoryId" ColumnName="locationCategoryId" />
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
           <ScalarProperty Name="operatingDays" ColumnName="operatingDays" />
@@ -261,6 +264,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="dmlmModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
           <ScalarProperty Name="createDate" ColumnName="createDate" />
           <ScalarProperty Name="isActive" ColumnName="isActive" />

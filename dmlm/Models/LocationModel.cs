@@ -24,6 +24,7 @@ namespace dmlm.Models
             public string GoogleMapSmall { get; set; }
             public string GoogleMapMedium { get; set; }
             public string ImageURL { get; set; }
+            public string Phone { get; set; }
         }
 
         public Location GetLocation(int serviceProviderID, int locationID)
@@ -45,7 +46,8 @@ namespace dmlm.Models
                     HourStart = locationEntity.operatingHoursStart,
                     HourEnd = locationEntity.operatingHoursEnd,
                     DaysOpen = locationEntity.operatingDays,
-                    LocationName = locationEntity.name
+                    LocationName = locationEntity.name,
+                    Phone = locationEntity.phone
 
                 };
                 return location;
@@ -78,7 +80,8 @@ namespace dmlm.Models
                             HourEnd = location.operatingHoursEnd,
                             DaysOpen = location.operatingDays,
                             LocationName = location.name,
-                            ImageURL = location.imageUrl
+                            ImageURL = location.imageUrl,
+                            Phone = location.phone
                         });
                 }
 
@@ -113,7 +116,8 @@ namespace dmlm.Models
                                 HourEnd = location.operatingHoursEnd,
                                 DaysOpen = location.operatingDays,
                                 LocationName = location.name,
-                                ImageURL = location.imageUrl
+                                ImageURL = location.imageUrl,
+                                Phone = location.phone
                             });
                     }
                 }

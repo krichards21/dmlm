@@ -22,7 +22,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="preferredContactType" Type="bit" />
+          <Property Name="preferredContactEmail" Type="bit" />
           <Property Name="email" Type="varchar" MaxLength="150" />
           <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
           <Property Name="cellPhoneNumber" Type="nchar" MaxLength="10" />
@@ -35,6 +35,8 @@
           <Property Name="workingHoursStartTime" Type="time" Precision="7" />
           <Property Name="workingHoursEndTime" Type="time" Precision="7" />
           <Property Name="contactId" Type="int" Nullable="false" />
+          <Property Name="prefrredContactCell" Type="bit" />
+          <Property Name="preferredContactPhone" Type="bit" />
         </EntityType>
         <EntityType Name="DefaultUOM">
           <Key>
@@ -97,6 +99,7 @@
           <Property Name="operatingDays" Type="varchar" MaxLength="50" />
           <Property Name="serviceProviderId" Type="int" Nullable="false" />
           <Property Name="locationCategoryId" Type="int" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LocationCategory">
           <Key>
@@ -268,6 +271,7 @@
           <Property Name="isActive" Type="bit" />
           <Property Name="createDate" Type="datetime" />
           <Property Name="serviceProviderId" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityContainer Name="dmlmModelStoreContainer">
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
@@ -441,7 +445,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="preferredContactType" Type="Boolean" />
           <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="cellPhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -455,6 +458,9 @@
           <Property Name="workingHoursEndTime" Type="Time" Precision="7" />
           <Property Name="contactId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Contact" Relationship="dmlmModel.ContactContactItem" FromRole="ContactItem" ToRole="Contact" />
+          <Property Name="preferredContactEmail" Type="Boolean" />
+          <Property Name="prefrredContactCell" Type="Boolean" />
+          <Property Name="preferredContactPhone" Type="Boolean" />
         </EntityType>
         <EntityType Name="DefaultUOM">
           <Key>
@@ -530,6 +536,7 @@
           <NavigationProperty Name="LocationCategory" Relationship="dmlmModel.LocationCategoryLocation" FromRole="Location" ToRole="LocationCategory" />
           <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderLocation" FromRole="Location" ToRole="ServiceProvider" />
           <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.LocationRegionLocation" FromRole="Location" ToRole="RegionLocation" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="LocationCategory">
           <Key>
@@ -726,6 +733,7 @@
           <Property Name="createDate" Type="DateTime" Precision="3" />
           <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
+          <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="OrganizationServiceProvider">
           <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -1071,6 +1079,9 @@
           <EntitySetMapping Name="ContactItems">
             <EntityTypeMapping TypeName="dmlmModel.ContactItem">
               <MappingFragment StoreEntitySet="ContactItem">
+                <ScalarProperty Name="preferredContactPhone" ColumnName="preferredContactPhone" />
+                <ScalarProperty Name="prefrredContactCell" ColumnName="prefrredContactCell" />
+                <ScalarProperty Name="preferredContactEmail" ColumnName="preferredContactEmail" />
                 <ScalarProperty Name="contactId" ColumnName="contactId" />
                 <ScalarProperty Name="workingHoursEndTime" ColumnName="workingHoursEndTime" />
                 <ScalarProperty Name="workingHoursStartTime" ColumnName="workingHoursStartTime" />
@@ -1083,7 +1094,6 @@
                 <ScalarProperty Name="cellPhoneNumber" ColumnName="cellPhoneNumber" />
                 <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="preferredContactType" ColumnName="preferredContactType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1128,6 +1138,7 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="dmlmModel.Location">
               <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="locationCategoryId" ColumnName="locationCategoryId" />
                 <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
                 <ScalarProperty Name="operatingDays" ColumnName="operatingDays" />
@@ -1315,6 +1326,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="dmlmModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
                 <ScalarProperty Name="createDate" ColumnName="createDate" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />

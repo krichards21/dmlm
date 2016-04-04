@@ -15,7 +15,6 @@ namespace dmlm
     public partial class ContactItem
     {
         public int Id { get; set; }
-        public Nullable<bool> preferredContactType { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
         public string cellPhoneNumber { get; set; }
@@ -28,6 +27,9 @@ namespace dmlm
         public Nullable<System.TimeSpan> workingHoursStartTime { get; set; }
         public Nullable<System.TimeSpan> workingHoursEndTime { get; set; }
         public int contactId { get; set; }
+        public Nullable<bool> preferredContactEmail { get; set; }
+        public Nullable<bool> prefrredContactCell { get; set; }
+        public Nullable<bool> preferredContactPhone { get; set; }
     
         public virtual Contact Contact { get; set; }
     }

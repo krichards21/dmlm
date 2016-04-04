@@ -17,7 +17,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="preferredContactType" Type="bit" />
+    <Property Name="preferredContactEmail" Type="bit" />
     <Property Name="email" Type="varchar" MaxLength="150" />
     <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
     <Property Name="cellPhoneNumber" Type="nchar" MaxLength="10" />
@@ -30,6 +30,8 @@
     <Property Name="workingHoursStartTime" Type="time" Precision="7" />
     <Property Name="workingHoursEndTime" Type="time" Precision="7" />
     <Property Name="contactId" Type="int" Nullable="false" />
+    <Property Name="prefrredContactCell" Type="bit" />
+    <Property Name="preferredContactPhone" Type="bit" />
   </EntityType>
   <EntityType Name="DefaultUOM">
     <Key>
@@ -92,6 +94,7 @@
     <Property Name="operatingDays" Type="varchar" MaxLength="50" />
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
     <Property Name="locationCategoryId" Type="int" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="LocationCategory">
     <Key>
@@ -263,6 +266,7 @@
     <Property Name="isActive" Type="bit" />
     <Property Name="createDate" Type="datetime" />
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityContainer Name="dmlmModelStoreContainer">
     <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />

@@ -146,7 +146,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="preferredContactType" Type="Boolean" />
     <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="cellPhoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -160,6 +159,9 @@
     <Property Name="workingHoursEndTime" Type="Time" Precision="7" />
     <Property Name="contactId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Contact" Relationship="dmlmModel.ContactContactItem" FromRole="ContactItem" ToRole="Contact" />
+    <Property Name="preferredContactEmail" Type="Boolean" />
+    <Property Name="prefrredContactCell" Type="Boolean" />
+    <Property Name="preferredContactPhone" Type="Boolean" />
   </EntityType>
   <EntityType Name="DefaultUOM">
     <Key>
@@ -235,6 +237,7 @@
     <NavigationProperty Name="LocationCategory" Relationship="dmlmModel.LocationCategoryLocation" FromRole="Location" ToRole="LocationCategory" />
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderLocation" FromRole="Location" ToRole="ServiceProvider" />
     <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.LocationRegionLocation" FromRole="Location" ToRole="RegionLocation" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="LocationCategory">
     <Key>
@@ -431,6 +434,7 @@
     <Property Name="createDate" Type="DateTime" Precision="3" />
     <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
+    <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="OrganizationServiceProvider">
     <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
