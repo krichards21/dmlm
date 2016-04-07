@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="dmlmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Alerts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="alertType" Type="bit" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="serviceProviderID" Type="int" Nullable="false" />
+    <Property Name="link" Type="varchar" MaxLength="250" />
+    <Property Name="createDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Contact">
     <Key>
       <PropertyRef Name="Id" />
@@ -82,7 +93,7 @@
     <Property Name="postalCode" Type="nchar" MaxLength="10" />
     <Property Name="county" Type="varchar" MaxLength="50" />
     <Property Name="latitude" Type="float" />
-    <Property Name="long" Type="float" />
+    <Property Name="longitude" Type="float" />
     <Property Name="radius" Type="float" />
     <Property Name="zoneDescription" Type="varchar" MaxLength="50" />
     <Property Name="googleMapSmall" Type="varchar(max)" />
@@ -104,6 +115,15 @@
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="LocationClosedDates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="locationID" Type="int" />
+    <Property Name="exclusionDate" Type="datetime" />
+    <Property Name="exclusionNote" Type="varchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="LocationContact">
     <Key>
       <PropertyRef Name="Id" />
@@ -114,6 +134,16 @@
     <Property Name="createDate" Type="datetime" />
     <Property Name="isActive" Type="bit" />
     <Property Name="isPrimaryContact" Type="bit" />
+  </EntityType>
+  <EntityType Name="LocationHours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="hoursStart" Type="time" Precision="7" />
+    <Property Name="hoursEnd" Type="time" Precision="7" />
+    <Property Name="locationID" Type="int" />
+    <Property Name="day" Type="char" MaxLength="10" />
   </EntityType>
   <EntityType Name="Manufacturer">
     <Key>
@@ -268,7 +298,16 @@
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="UserAlert">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="userID" Type="int" />
+    <Property Name="alertID" Type="int" />
+  </EntityType>
   <EntityContainer Name="dmlmModelStoreContainer">
+    <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ContactItem" EntityType="Self.ContactItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DefaultUOM" EntityType="Self.DefaultUOM" Schema="dbo" store:Type="Tables" />
@@ -276,7 +315,9 @@
     <EntitySet Name="InventoryLocation" EntityType="Self.InventoryLocation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LocationCategory" EntityType="Self.LocationCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationClosedDates" EntityType="Self.LocationClosedDates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LocationContact" EntityType="Self.LocationContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationHours" EntityType="Self.LocationHours" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -289,5 +330,6 @@
     <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAlert" EntityType="Self.UserAlert" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

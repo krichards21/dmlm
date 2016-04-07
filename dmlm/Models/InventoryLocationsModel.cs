@@ -15,6 +15,7 @@ namespace dmlm.Models
         public string ProductName { get; set; }
         public double? Count { get; set; }
         public int UOMID { get; set; }
+        public DateTime? CountDateTime { get; set; }
     }
 
     public class LocationProductCounts
@@ -68,7 +69,8 @@ namespace dmlm.Models
                             ProductID = inventoryCount.productId,
                             ProductName = inventoryCount.Product.name,
                             UOMID = inventoryCount.uomId,
-                            Count = inventoryCount.count
+                            Count = inventoryCount.count,
+                            CountDateTime = inventoryCount.updateDate
                         });
                     }
                     //inventoryCounts.InventoryProductCounts.Add(new InventoryLocationProducts()

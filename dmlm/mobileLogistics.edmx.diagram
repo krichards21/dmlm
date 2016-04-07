@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aadfd94606aa402390e33cc3d50a1f17" Name="Diagram1" ZoomLevel="80">
+      <Diagram DiagramId="aadfd94606aa402390e33cc3d50a1f17" Name="Diagram1" ZoomLevel="66">
         <EntityTypeShape EntityType="dmlmModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.ContactItem" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.DefaultUOM" Width="1.5" PointX="4.75" PointY="0.75" />
@@ -51,6 +51,14 @@
         <AssociationConnector Association="dmlmModel.TerritoryRegion" />
         <EntityTypeShape EntityType="dmlmModel.Manufacturer" Width="1.5" PointX="11.375" PointY="11.75" />
         <AssociationConnector Association="dmlmModel.ManufacturerProduct" />
+        <EntityTypeShape EntityType="dmlmModel.Alert" Width="1.5" PointX="3.75" PointY="12.75" />
+        <EntityTypeShape EntityType="dmlmModel.LocationClosedDate" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dmlmModel.LocationHour" Width="1.5" PointX="13.75" PointY="12.75" />
+        <EntityTypeShape EntityType="dmlmModel.UserAlert" Width="1.5" PointX="0.75" PointY="14.75" />
+        <AssociationConnector Association="dmlmModel.UserUserAlert" />
+        <AssociationConnector Association="dmlmModel.AlertUserAlert" />
+        <AssociationConnector Association="dmlmModel.LocationLocationHour" />
+        <AssociationConnector Association="dmlmModel.LocationLocationClosedDate" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

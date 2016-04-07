@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dmlmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alerts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="alertType" Type="bit" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="serviceProviderID" Type="int" Nullable="false" />
+          <Property Name="link" Type="varchar" MaxLength="250" />
+          <Property Name="createDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Contact">
           <Key>
             <PropertyRef Name="Id" />
@@ -87,7 +98,7 @@
           <Property Name="postalCode" Type="nchar" MaxLength="10" />
           <Property Name="county" Type="varchar" MaxLength="50" />
           <Property Name="latitude" Type="float" />
-          <Property Name="long" Type="float" />
+          <Property Name="longitude" Type="float" />
           <Property Name="radius" Type="float" />
           <Property Name="zoneDescription" Type="varchar" MaxLength="50" />
           <Property Name="googleMapSmall" Type="varchar(max)" />
@@ -109,6 +120,15 @@
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="serviceProviderId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="LocationClosedDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="locationID" Type="int" />
+          <Property Name="exclusionDate" Type="datetime" />
+          <Property Name="exclusionNote" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="LocationContact">
           <Key>
             <PropertyRef Name="Id" />
@@ -119,6 +139,16 @@
           <Property Name="createDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
           <Property Name="isPrimaryContact" Type="bit" />
+        </EntityType>
+        <EntityType Name="LocationHours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="hoursStart" Type="time" Precision="7" />
+          <Property Name="hoursEnd" Type="time" Precision="7" />
+          <Property Name="locationID" Type="int" />
+          <Property Name="day" Type="char" MaxLength="10" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -273,7 +303,16 @@
           <Property Name="serviceProviderId" Type="int" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="UserAlert">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="alertID" Type="int" />
+        </EntityType>
         <EntityContainer Name="dmlmModelStoreContainer">
+          <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactItem" EntityType="Self.ContactItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DefaultUOM" EntityType="Self.DefaultUOM" Schema="dbo" store:Type="Tables" />
@@ -281,7 +320,9 @@
           <EntitySet Name="InventoryLocation" EntityType="Self.InventoryLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationCategory" EntityType="Self.LocationCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationClosedDates" EntityType="Self.LocationClosedDates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationContact" EntityType="Self.LocationContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationHours" EntityType="Self.LocationHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -294,6 +335,7 @@
           <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAlert" EntityType="Self.UserAlert" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -424,6 +466,26 @@
             <End Role="Manufacturer" EntitySet="Manufacturers" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="Alerts" EntityType="dmlmModel.Alert" />
+          <EntitySet Name="LocationClosedDates" EntityType="dmlmModel.LocationClosedDate" />
+          <EntitySet Name="LocationHours" EntityType="dmlmModel.LocationHour" />
+          <EntitySet Name="UserAlerts" EntityType="dmlmModel.UserAlert" />
+          <AssociationSet Name="UserUserAlert" Association="dmlmModel.UserUserAlert">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserAlert" EntitySet="UserAlerts" />
+          </AssociationSet>
+          <AssociationSet Name="AlertUserAlert" Association="dmlmModel.AlertUserAlert">
+            <End Role="Alert" EntitySet="Alerts" />
+            <End Role="UserAlert" EntitySet="UserAlerts" />
+          </AssociationSet>
+          <AssociationSet Name="LocationLocationHour" Association="dmlmModel.LocationLocationHour">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LocationHour" EntitySet="LocationHours" />
+          </AssociationSet>
+          <AssociationSet Name="LocationLocationClosedDate" Association="dmlmModel.LocationLocationClosedDate">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LocationClosedDate" EntitySet="LocationClosedDates" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -519,7 +581,6 @@
           <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="latitude" Type="Double" />
-          <Property Name="long" Type="Double" />
           <Property Name="radius" Type="Double" />
           <Property Name="zoneDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="googleMapSmall" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -537,6 +598,9 @@
           <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderLocation" FromRole="Location" ToRole="ServiceProvider" />
           <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.LocationRegionLocation" FromRole="Location" ToRole="RegionLocation" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="Double" />
+          <NavigationProperty Name="LocationHours" Relationship="dmlmModel.LocationLocationHour" FromRole="Location" ToRole="LocationHour" />
+          <NavigationProperty Name="LocationClosedDates" Relationship="dmlmModel.LocationLocationClosedDate" FromRole="Location" ToRole="LocationClosedDate" />
         </EntityType>
         <EntityType Name="LocationCategory">
           <Key>
@@ -734,6 +798,7 @@
           <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
           <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.UserUserAlert" FromRole="User" ToRole="UserAlert" />
         </EntityType>
         <Association Name="OrganizationServiceProvider">
           <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -1057,6 +1122,97 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="alertType" Type="Boolean" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="serviceProviderID" Type="Int32" Nullable="false" />
+          <Property Name="link" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.AlertUserAlert" FromRole="Alert" ToRole="UserAlert" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="LocationClosedDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="locationID" Type="Int32" />
+          <Property Name="exclusionDate" Type="DateTime" Precision="3" />
+          <Property Name="exclusionNote" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Location" Relationship="dmlmModel.LocationLocationClosedDate" FromRole="LocationClosedDate" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="LocationHour">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="hoursStart" Type="Time" Precision="7" />
+          <Property Name="hoursEnd" Type="Time" Precision="7" />
+          <Property Name="locationID" Type="Int32" />
+          <Property Name="day" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Location" Relationship="dmlmModel.LocationLocationHour" FromRole="LocationHour" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="UserAlert">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="alertID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="dmlmModel.UserUserAlert" FromRole="UserAlert" ToRole="User" />
+          <NavigationProperty Name="Alert" Relationship="dmlmModel.AlertUserAlert" FromRole="UserAlert" ToRole="Alert" />
+        </EntityType>
+        <Association Name="UserUserAlert">
+          <End Type="dmlmModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="dmlmModel.UserAlert" Role="UserAlert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAlert">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlertUserAlert">
+          <End Type="dmlmModel.Alert" Role="Alert" Multiplicity="0..1" />
+          <End Type="dmlmModel.UserAlert" Role="UserAlert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alert">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAlert">
+              <PropertyRef Name="alertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationLocationHour">
+          <End Type="dmlmModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="dmlmModel.LocationHour" Role="LocationHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocationHour">
+              <PropertyRef Name="locationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationLocationClosedDate">
+          <End Type="dmlmModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="dmlmModel.LocationClosedDate" Role="LocationClosedDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LocationClosedDate">
+              <PropertyRef Name="locationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1138,6 +1294,7 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="dmlmModel.Location">
               <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="locationCategoryId" ColumnName="locationCategoryId" />
                 <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
@@ -1150,7 +1307,6 @@
                 <ScalarProperty Name="googleMapSmall" ColumnName="googleMapSmall" />
                 <ScalarProperty Name="zoneDescription" ColumnName="zoneDescription" />
                 <ScalarProperty Name="radius" ColumnName="radius" />
-                <ScalarProperty Name="long" ColumnName="long" />
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="county" ColumnName="county" />
                 <ScalarProperty Name="postalCode" ColumnName="postalCode" />
@@ -1347,6 +1503,48 @@
                 <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alerts">
+            <EntityTypeMapping TypeName="dmlmModel.Alert">
+              <MappingFragment StoreEntitySet="Alerts">
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="serviceProviderID" ColumnName="serviceProviderID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="alertType" ColumnName="alertType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationClosedDates">
+            <EntityTypeMapping TypeName="dmlmModel.LocationClosedDate">
+              <MappingFragment StoreEntitySet="LocationClosedDates">
+                <ScalarProperty Name="exclusionNote" ColumnName="exclusionNote" />
+                <ScalarProperty Name="exclusionDate" ColumnName="exclusionDate" />
+                <ScalarProperty Name="locationID" ColumnName="locationID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationHours">
+            <EntityTypeMapping TypeName="dmlmModel.LocationHour">
+              <MappingFragment StoreEntitySet="LocationHours">
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="locationID" ColumnName="locationID" />
+                <ScalarProperty Name="hoursEnd" ColumnName="hoursEnd" />
+                <ScalarProperty Name="hoursStart" ColumnName="hoursStart" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAlerts">
+            <EntityTypeMapping TypeName="dmlmModel.UserAlert">
+              <MappingFragment StoreEntitySet="UserAlert">
+                <ScalarProperty Name="alertID" ColumnName="alertID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

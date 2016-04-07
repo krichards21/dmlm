@@ -204,6 +204,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -217,8 +220,11 @@
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlertsAdminController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryCountsController.cs" />
+    <Compile Include="Controllers\LocationsAdminController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -240,7 +246,13 @@
     <Compile Include="LocationCategory.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
+    <Compile Include="LocationClosedDate.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
     <Compile Include="LocationContact.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocationHour.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
     <Compile Include="Manufacturer.cs">
@@ -262,6 +274,7 @@
       <DependentUpon>mobileLogistics.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AlertModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InventoryCountModel.cs" />
     <Compile Include="Models\InventoryLocationsModel.cs" />
@@ -301,6 +314,9 @@
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserAlert.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -382,6 +398,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\LocationsAdmin\Create.cshtml" />
+    <Content Include="Views\LocationsAdmin\Delete.cshtml" />
+    <Content Include="Views\LocationsAdmin\Details.cshtml" />
+    <Content Include="Views\LocationsAdmin\Edit.cshtml" />
+    <Content Include="Views\LocationsAdmin\Index.cshtml" />
+    <Content Include="Views\AlertsAdmin\Create.cshtml" />
+    <Content Include="Views\AlertsAdmin\Delete.cshtml" />
+    <Content Include="Views\AlertsAdmin\Details.cshtml" />
+    <Content Include="Views\AlertsAdmin\Edit.cshtml" />
+    <Content Include="Views\AlertsAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

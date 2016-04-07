@@ -36,6 +36,7 @@ namespace dmlm.Controllers
         [ResponseType(typeof(Models.LocationModel.Location))]
         [Route("GetLocation/{id:int}")]
         public IHttpActionResult GetLocation(int id)
+
         {
             var serviceProviderID = 0;
             var userID = 0;

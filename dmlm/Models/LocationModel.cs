@@ -19,8 +19,8 @@ namespace dmlm.Models
             public string PostalCode { get; set; }
             public string County { get; set; }
             public string DaysOpen { get; set; }
-            public TimeSpan? HourStart { get; set; }
-            public TimeSpan? HourEnd { get; set; }
+            public string HourStart { get; set; }
+            public string HourEnd { get; set; }
             public string GoogleMapSmall { get; set; }
             public string GoogleMapMedium { get; set; }
             public string ImageURL { get; set; }
@@ -43,8 +43,8 @@ namespace dmlm.Models
                     State = locationEntity.state,
                     GoogleMapSmall = locationEntity.googleMapSmall,
                     GoogleMapMedium = locationEntity.googleMapMedium,
-                    HourStart = locationEntity.operatingHoursStart,
-                    HourEnd = locationEntity.operatingHoursEnd,
+                    HourStart = locationEntity.operatingHoursStart.HasValue ? locationEntity.operatingHoursStart.Value.ToString(@"hh\:mm") : "",
+                    HourEnd = locationEntity.operatingHoursEnd.HasValue ? locationEntity.operatingHoursEnd.Value.ToString(@"hh\:mm") : "",
                     DaysOpen = locationEntity.operatingDays,
                     LocationName = locationEntity.name,
                     Phone = locationEntity.phone
@@ -76,8 +76,8 @@ namespace dmlm.Models
                             PostalCode = location.postalCode,
                             GoogleMapSmall = location.googleMapSmall,
                             GoogleMapMedium = location.googleMapMedium,
-                            HourStart = location.operatingHoursStart,
-                            HourEnd = location.operatingHoursEnd,
+                            HourStart = location.operatingHoursStart.HasValue ? location.operatingHoursStart.Value.ToString(@"hh\:mm") : "",
+                            HourEnd = location.operatingHoursEnd.HasValue ? location.operatingHoursEnd.Value.ToString(@"hh\:mm") : "",
                             DaysOpen = location.operatingDays,
                             LocationName = location.name,
                             ImageURL = location.imageUrl,
@@ -110,10 +110,11 @@ namespace dmlm.Models
                                 Address3 = location.address3,
                                 City = location.city,
                                 State = location.state,
+                                PostalCode = location.postalCode,
                                 GoogleMapSmall = location.googleMapSmall,
                                 GoogleMapMedium = location.googleMapMedium,
-                                HourStart = location.operatingHoursStart,
-                                HourEnd = location.operatingHoursEnd,
+                                HourStart = location.operatingHoursStart.HasValue ? location.operatingHoursStart.Value.ToString(@"hh\:mm") : "",
+                                HourEnd = location.operatingHoursEnd.HasValue ? location.operatingHoursEnd.Value.ToString(@"hh\:mm") : "",
                                 DaysOpen = location.operatingDays,
                                 LocationName = location.name,
                                 ImageURL = location.imageUrl,

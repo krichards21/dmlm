@@ -125,6 +125,26 @@
       <End Role="Manufacturer" EntitySet="Manufacturers" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
+    <EntitySet Name="Alerts" EntityType="dmlmModel.Alert" />
+    <EntitySet Name="LocationClosedDates" EntityType="dmlmModel.LocationClosedDate" />
+    <EntitySet Name="LocationHours" EntityType="dmlmModel.LocationHour" />
+    <EntitySet Name="UserAlerts" EntityType="dmlmModel.UserAlert" />
+    <AssociationSet Name="UserUserAlert" Association="dmlmModel.UserUserAlert">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserAlert" EntitySet="UserAlerts" />
+    </AssociationSet>
+    <AssociationSet Name="AlertUserAlert" Association="dmlmModel.AlertUserAlert">
+      <End Role="Alert" EntitySet="Alerts" />
+      <End Role="UserAlert" EntitySet="UserAlerts" />
+    </AssociationSet>
+    <AssociationSet Name="LocationLocationHour" Association="dmlmModel.LocationLocationHour">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="LocationHour" EntitySet="LocationHours" />
+    </AssociationSet>
+    <AssociationSet Name="LocationLocationClosedDate" Association="dmlmModel.LocationLocationClosedDate">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="LocationClosedDate" EntitySet="LocationClosedDates" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contact">
     <Key>
@@ -220,7 +240,6 @@
     <Property Name="postalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="latitude" Type="Double" />
-    <Property Name="long" Type="Double" />
     <Property Name="radius" Type="Double" />
     <Property Name="zoneDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="googleMapSmall" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -238,6 +257,9 @@
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderLocation" FromRole="Location" ToRole="ServiceProvider" />
     <NavigationProperty Name="RegionLocations" Relationship="dmlmModel.LocationRegionLocation" FromRole="Location" ToRole="RegionLocation" />
     <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="longitude" Type="Double" />
+    <NavigationProperty Name="LocationHours" Relationship="dmlmModel.LocationLocationHour" FromRole="Location" ToRole="LocationHour" />
+    <NavigationProperty Name="LocationClosedDates" Relationship="dmlmModel.LocationLocationClosedDate" FromRole="Location" ToRole="LocationClosedDate" />
   </EntityType>
   <EntityType Name="LocationCategory">
     <Key>
@@ -435,6 +457,7 @@
     <Property Name="serviceProviderId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
     <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.UserUserAlert" FromRole="User" ToRole="UserAlert" />
   </EntityType>
   <Association Name="OrganizationServiceProvider">
     <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -755,6 +778,97 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="manufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Alert">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="alertType" Type="Boolean" Nullable="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="serviceProviderID" Type="Int32" Nullable="false" />
+    <Property Name="link" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.AlertUserAlert" FromRole="Alert" ToRole="UserAlert" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="LocationClosedDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="locationID" Type="Int32" />
+    <Property Name="exclusionDate" Type="DateTime" Precision="3" />
+    <Property Name="exclusionNote" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Location" Relationship="dmlmModel.LocationLocationClosedDate" FromRole="LocationClosedDate" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="LocationHour">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="hoursStart" Type="Time" Precision="7" />
+    <Property Name="hoursEnd" Type="Time" Precision="7" />
+    <Property Name="locationID" Type="Int32" />
+    <Property Name="day" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Location" Relationship="dmlmModel.LocationLocationHour" FromRole="LocationHour" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="UserAlert">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="userID" Type="Int32" />
+    <Property Name="alertID" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="dmlmModel.UserUserAlert" FromRole="UserAlert" ToRole="User" />
+    <NavigationProperty Name="Alert" Relationship="dmlmModel.AlertUserAlert" FromRole="UserAlert" ToRole="Alert" />
+  </EntityType>
+  <Association Name="UserUserAlert">
+    <End Type="dmlmModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="dmlmModel.UserAlert" Role="UserAlert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserAlert">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AlertUserAlert">
+    <End Type="dmlmModel.Alert" Role="Alert" Multiplicity="0..1" />
+    <End Type="dmlmModel.UserAlert" Role="UserAlert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alert">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserAlert">
+        <PropertyRef Name="alertID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LocationLocationHour">
+    <End Type="dmlmModel.Location" Role="Location" Multiplicity="0..1" />
+    <End Type="dmlmModel.LocationHour" Role="LocationHour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocationHour">
+        <PropertyRef Name="locationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LocationLocationClosedDate">
+    <End Type="dmlmModel.Location" Role="Location" Multiplicity="0..1" />
+    <End Type="dmlmModel.LocationClosedDate" Role="LocationClosedDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LocationClosedDate">
+        <PropertyRef Name="locationID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

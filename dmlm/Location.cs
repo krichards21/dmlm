@@ -20,6 +20,8 @@ namespace dmlm
             this.LocationContacts = new HashSet<LocationContact>();
             this.InventoryLocations = new HashSet<InventoryLocation>();
             this.RegionLocations = new HashSet<RegionLocation>();
+            this.LocationHours = new HashSet<LocationHour>();
+            this.LocationClosedDates = new HashSet<LocationClosedDate>();
         }
     
         public int Id { get; set; }
@@ -33,7 +35,6 @@ namespace dmlm
         public string postalCode { get; set; }
         public string county { get; set; }
         public Nullable<double> latitude { get; set; }
-        public Nullable<double> @long { get; set; }
         public Nullable<double> radius { get; set; }
         public string zoneDescription { get; set; }
         public string googleMapSmall { get; set; }
@@ -46,6 +47,7 @@ namespace dmlm
         public int serviceProviderId { get; set; }
         public int locationCategoryId { get; set; }
         public string phone { get; set; }
+        public Nullable<double> longitude { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LocationContact> LocationContacts { get; set; }
@@ -55,5 +57,9 @@ namespace dmlm
         public virtual ServiceProvider ServiceProvider { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegionLocation> RegionLocations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LocationHour> LocationHours { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LocationClosedDate> LocationClosedDates { get; set; }
     }
 }

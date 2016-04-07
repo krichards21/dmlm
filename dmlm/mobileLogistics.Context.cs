@@ -45,5 +45,9 @@ namespace dmlm
         public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
+        public virtual DbSet<Alert> Alerts { get; set; }
+        public virtual DbSet<LocationClosedDate> LocationClosedDates { get; set; }
+        public virtual DbSet<LocationHour> LocationHours { get; set; }
+        public virtual DbSet<UserAlert> UserAlerts { get; set; }
     }
 }

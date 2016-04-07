@@ -1,0 +1,202 @@
+﻿@model dmlm.Location
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Location</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.county)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.county)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.radius)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.radius)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zoneDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zoneDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.googleMapSmall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.googleMapSmall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.googleMapMedium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.googleMapMedium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.operatingHoursStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.operatingHoursStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.operatingHoursEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.operatingHoursEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.operatingDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.operatingDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationCategory.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationCategory.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceProvider.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceProvider.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

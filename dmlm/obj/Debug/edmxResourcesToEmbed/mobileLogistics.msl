@@ -76,6 +76,7 @@
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="dmlmModel.Location">
         <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="locationCategoryId" ColumnName="locationCategoryId" />
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
@@ -88,7 +89,6 @@
           <ScalarProperty Name="googleMapSmall" ColumnName="googleMapSmall" />
           <ScalarProperty Name="zoneDescription" ColumnName="zoneDescription" />
           <ScalarProperty Name="radius" ColumnName="radius" />
-          <ScalarProperty Name="long" ColumnName="long" />
           <ScalarProperty Name="latitude" ColumnName="latitude" />
           <ScalarProperty Name="county" ColumnName="county" />
           <ScalarProperty Name="postalCode" ColumnName="postalCode" />
@@ -285,6 +285,48 @@
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Alerts">
+      <EntityTypeMapping TypeName="dmlmModel.Alert">
+        <MappingFragment StoreEntitySet="Alerts">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="serviceProviderID" ColumnName="serviceProviderID" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="alertType" ColumnName="alertType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationClosedDates">
+      <EntityTypeMapping TypeName="dmlmModel.LocationClosedDate">
+        <MappingFragment StoreEntitySet="LocationClosedDates">
+          <ScalarProperty Name="exclusionNote" ColumnName="exclusionNote" />
+          <ScalarProperty Name="exclusionDate" ColumnName="exclusionDate" />
+          <ScalarProperty Name="locationID" ColumnName="locationID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationHours">
+      <EntityTypeMapping TypeName="dmlmModel.LocationHour">
+        <MappingFragment StoreEntitySet="LocationHours">
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="locationID" ColumnName="locationID" />
+          <ScalarProperty Name="hoursEnd" ColumnName="hoursEnd" />
+          <ScalarProperty Name="hoursStart" ColumnName="hoursStart" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAlerts">
+      <EntityTypeMapping TypeName="dmlmModel.UserAlert">
+        <MappingFragment StoreEntitySet="UserAlert">
+          <ScalarProperty Name="alertID" ColumnName="alertID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
