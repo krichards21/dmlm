@@ -264,6 +264,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="dmlmModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
           <ScalarProperty Name="createDate" ColumnName="createDate" />
@@ -327,6 +328,16 @@
         <MappingFragment StoreEntitySet="UserAlert">
           <ScalarProperty Name="alertID" ColumnName="alertID" />
           <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDevices">
+      <EntityTypeMapping TypeName="dmlmModel.UserDevice">
+        <MappingFragment StoreEntitySet="UserDevice">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="userDeviceDate" ColumnName="userDeviceDate" />
+          <ScalarProperty Name="userDeviceType" ColumnName="userDeviceType" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

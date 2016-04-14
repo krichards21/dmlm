@@ -297,6 +297,7 @@
     <Property Name="createDate" Type="datetime" />
     <Property Name="serviceProviderId" Type="int" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="250" />
+    <Property Name="lastUpdateDate" Type="datetime" />
   </EntityType>
   <EntityType Name="UserAlert">
     <Key>
@@ -305,6 +306,15 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="userID" Type="int" />
     <Property Name="alertID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="userDeviceType" Type="int" Nullable="false" />
+    <Property Name="userDeviceDate" Type="datetime" Nullable="false" />
+    <Property Name="userID" Type="int" Nullable="false" />
   </EntityType>
   <EntityContainer Name="dmlmModelStoreContainer">
     <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
@@ -331,5 +341,6 @@
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAlert" EntityType="Self.UserAlert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDevice" EntityType="Self.UserDevice" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

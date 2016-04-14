@@ -228,6 +228,8 @@
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DefaultUOM.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
@@ -281,6 +283,7 @@
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Organization.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
@@ -317,6 +320,9 @@
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
     <Compile Include="UserAlert.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDevice.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -408,6 +414,11 @@
     <Content Include="Views\AlertsAdmin\Details.cshtml" />
     <Content Include="Views\AlertsAdmin\Edit.cshtml" />
     <Content Include="Views\AlertsAdmin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

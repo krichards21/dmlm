@@ -49,5 +49,6 @@ namespace dmlm
         public virtual DbSet<LocationClosedDate> LocationClosedDates { get; set; }
         public virtual DbSet<LocationHour> LocationHours { get; set; }
         public virtual DbSet<UserAlert> UserAlerts { get; set; }
+        public virtual DbSet<UserDevice> UserDevices { get; set; }
     }
 }

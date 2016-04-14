@@ -145,6 +145,7 @@
       <End Role="Location" EntitySet="Locations" />
       <End Role="LocationClosedDate" EntitySet="LocationClosedDates" />
     </AssociationSet>
+    <EntitySet Name="UserDevices" EntityType="dmlmModel.UserDevice" />
   </EntityContainer>
   <EntityType Name="Contact">
     <Key>
@@ -458,6 +459,7 @@
     <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
     <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.UserUserAlert" FromRole="User" ToRole="UserAlert" />
+    <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="OrganizationServiceProvider">
     <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -872,4 +874,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="userDeviceType" Type="Int32" Nullable="false" />
+    <Property Name="userDeviceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

@@ -12,53 +12,45 @@ using dmlm;
 
 namespace dmlm.Controllers
 {
-    [RoutePrefix("Alerts")]
-    public class AlertsController : ApiController
+    [RoutePrefix("Users")]
+    public class UsersController : ApiController
     {
         private dmlmEntities db = new dmlmEntities();
 
-        //// GET: api/Alerts
-        //public IQueryable<Alert> GetAlerts()
-        //{
-        //    return db.Alerts;
-        //}
-
-        // GET: api/Alerts/5
-        [ResponseType(typeof(Alert))]
-        public IHttpActionResult GetAlert(int id)
+        // GET: api/Users
+        public IQueryable<User> GetUsers()
         {
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            return db.Users;
+        }
+
+        // GET: api/Users/5
+        [ResponseType(typeof(User))]
+        public IHttpActionResult GetUser(int id)
+        {
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(alert);
+            return Ok(user);
         }
 
-        // GET: api/Locations/5
-        [ResponseType(typeof(Models.LocationModel.Location))]
-        [Route("GetAlerts/{id:int}")]
-        public IHttpActionResult GetListAlerts(int id)
-        {
-            return Ok(new Models.AlertModel().GetAlerts(1, 1));
-        }
-
-        // PUT: api/Alerts/5
+        // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAlert(int id, Alert alert)
+        public IHttpActionResult PutUser(int id, User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != alert.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(alert).State = EntityState.Modified;
+            db.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -66,7 +58,7 @@ namespace dmlm.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AlertExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -79,16 +71,24 @@ namespace dmlm.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Alerts
-        [ResponseType(typeof(Alert))]
-        public IHttpActionResult PostAlert(Alert alert)
+        // POST: api/Login
+        [ResponseType(typeof(Models.UserModel.User))]
+        [Route("LoginUser/")]
+        public IHttpActionResult LoginUser(Models.UserModel.LoginModel loginModel)
+        {
+            return Ok(new Models.UserModel().GetUserByEmailandPwd(loginModel));
+        }
+
+        // POST: api/Users
+        [ResponseType(typeof(User))]
+        public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Alerts.Add(alert);
+            db.Users.Add(user);
 
             try
             {
@@ -96,7 +96,7 @@ namespace dmlm.Controllers
             }
             catch (DbUpdateException)
             {
-                if (AlertExists(alert.Id))
+                if (UserExists(user.Id))
                 {
                     return Conflict();
                 }
@@ -106,23 +106,23 @@ namespace dmlm.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = alert.Id }, alert);
+            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Alerts/5
-        [ResponseType(typeof(Alert))]
-        public IHttpActionResult DeleteAlert(int id)
+        // DELETE: api/Users/5
+        [ResponseType(typeof(User))]
+        public IHttpActionResult DeleteUser(int id)
         {
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            db.Alerts.Remove(alert);
+            db.Users.Remove(user);
             db.SaveChanges();
 
-            return Ok(alert);
+            return Ok(user);
         }
 
         protected override void Dispose(bool disposing)
@@ -134,9 +134,9 @@ namespace dmlm.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AlertExists(int id)
+        private bool UserExists(int id)
         {
-            return db.Alerts.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }

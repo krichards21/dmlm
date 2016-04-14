@@ -16,7 +16,7 @@ namespace dmlm.Models
         }
 
   
-        public List<Alert> GetAlerts(int serviceProviderID)
+        public List<Alert> GetAlerts(int serviceProviderID, int userID)
         {
             using (dmlmEntities db = new dmlmEntities())
             {
@@ -24,6 +24,7 @@ namespace dmlm.Models
                 var alertList = new List<Alert>();
                 foreach (var alert in alertEntity)
                 {
+                    if (alert.UserAlerts == null || alert.UserAlerts.Where(a => a.userID == userID).Count() == 1)
                     alertList.Add(new Alert()
                     {
                         AlertID = alert.Id,

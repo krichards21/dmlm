@@ -302,6 +302,9 @@
           <Property Name="createDate" Type="datetime" />
           <Property Name="serviceProviderId" Type="int" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="250" />
+          <Property Name="lastUpdateDate" Type="datetime" />
+          <Property Name="profileImageUrl" Type="varchar" MaxLength="50" />
+          <Property Name="profileImageIconUrl" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="UserAlert">
           <Key>
@@ -310,6 +313,15 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="userID" Type="int" />
           <Property Name="alertID" Type="int" />
+        </EntityType>
+        <EntityType Name="UserDevice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="userDeviceType" Type="int" Nullable="false" />
+          <Property Name="userDeviceDate" Type="datetime" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="dmlmModelStoreContainer">
           <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
@@ -336,6 +348,7 @@
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAlert" EntityType="Self.UserAlert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDevice" EntityType="Self.UserDevice" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -486,6 +499,7 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="LocationClosedDate" EntitySet="LocationClosedDates" />
           </AssociationSet>
+          <EntitySet Name="UserDevices" EntityType="dmlmModel.UserDevice" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -799,6 +813,9 @@
           <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
           <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.UserUserAlert" FromRole="User" ToRole="UserAlert" />
+          <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="profileImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="profileImageIconUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="OrganizationServiceProvider">
           <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -1213,6 +1230,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserDevice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="userDeviceType" Type="Int32" Nullable="false" />
+          <Property Name="userDeviceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1482,6 +1508,9 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="dmlmModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="profileImageIconUrl" ColumnName="profileImageIconUrl" />
+                <ScalarProperty Name="profileImageUrl" ColumnName="profileImageUrl" />
+                <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
                 <ScalarProperty Name="createDate" ColumnName="createDate" />
@@ -1545,6 +1574,16 @@
               <MappingFragment StoreEntitySet="UserAlert">
                 <ScalarProperty Name="alertID" ColumnName="alertID" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDevices">
+            <EntityTypeMapping TypeName="dmlmModel.UserDevice">
+              <MappingFragment StoreEntitySet="UserDevice">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="userDeviceDate" ColumnName="userDeviceDate" />
+                <ScalarProperty Name="userDeviceType" ColumnName="userDeviceType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
