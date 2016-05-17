@@ -145,6 +145,11 @@
       <End Role="Location" EntitySet="Locations" />
       <End Role="LocationClosedDate" EntitySet="LocationClosedDates" />
     </AssociationSet>
+    <EntitySet Name="UserDevices" EntityType="dmlmModel.UserDevice" />
+    <AssociationSet Name="UserUserDevice" Association="dmlmModel.UserUserDevice">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserDevice" EntitySet="UserDevices" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contact">
     <Key>
@@ -458,6 +463,10 @@
     <NavigationProperty Name="InventoryCounts" Relationship="dmlmModel.UserInventoryCount" FromRole="User" ToRole="InventoryCount" />
     <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="UserAlerts" Relationship="dmlmModel.UserUserAlert" FromRole="User" ToRole="UserAlert" />
+    <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="profileImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="profileImageIconUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserDevices" Relationship="dmlmModel.UserUserDevice" FromRole="User" ToRole="UserDevice" />
   </EntityType>
   <Association Name="OrganizationServiceProvider">
     <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -869,6 +878,28 @@
       </Principal>
       <Dependent Role="LocationClosedDate">
         <PropertyRef Name="locationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserDevice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="userDeviceType" Type="Int32" Nullable="false" />
+    <Property Name="userDeviceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="dmlmModel.UserUserDevice" FromRole="UserDevice" ToRole="User" />
+  </EntityType>
+  <Association Name="UserUserDevice">
+    <End Type="dmlmModel.User" Role="User" Multiplicity="1" />
+    <End Type="dmlmModel.UserDevice" Role="UserDevice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserDevice">
+        <PropertyRef Name="userID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

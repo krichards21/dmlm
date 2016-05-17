@@ -247,6 +247,13 @@
           <Property Name="isActive" Type="bit" />
           <Property Name="isManager" Type="bit" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="ServiceProvider">
           <Key>
             <PropertyRef Name="Id" />
@@ -265,6 +272,25 @@
           <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
           <Property Name="faxNumber" Type="nchar" MaxLength="10" />
           <Property Name="businessPhoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="layout" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServiceProviderWidgetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ServiceProviderWidgetID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceProviderWidgets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ServiceProviderID" Type="int" Nullable="false" />
+          <Property Name="WidgetID" Type="int" Nullable="false" />
+          <Property Name="WidgetName" Type="varchar" MaxLength="100" />
+          <Property Name="Priority" Type="int" />
         </EntityType>
         <EntityType Name="Territory">
           <Key>
@@ -323,6 +349,15 @@
           <Property Name="userDeviceDate" Type="datetime" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Widget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="WidgetName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DefaultWidget" Type="bit" />
+          <Property Name="DefaultWidgetPriority" Type="int" />
+        </EntityType>
         <EntityContainer Name="dmlmModelStoreContainer">
           <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
@@ -343,12 +378,16 @@
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionLocation" EntityType="Self.RegionLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegionUser" EntityType="Self.RegionUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceProvider" EntityType="Self.ServiceProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceProviderWidgetRole" EntityType="Self.ServiceProviderWidgetRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceProviderWidgets" EntityType="Self.ServiceProviderWidgets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAlert" EntityType="Self.UserAlert" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDevice" EntityType="Self.UserDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Widget" EntityType="Self.Widget" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -500,6 +539,30 @@
             <End Role="LocationClosedDate" EntitySet="LocationClosedDates" />
           </AssociationSet>
           <EntitySet Name="UserDevices" EntityType="dmlmModel.UserDevice" />
+          <AssociationSet Name="UserUserDevice" Association="dmlmModel.UserUserDevice">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserDevice" EntitySet="UserDevices" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="dmlmModel.Role" />
+          <EntitySet Name="ServiceProviderWidgetRoles" EntityType="dmlmModel.ServiceProviderWidgetRole" />
+          <EntitySet Name="ServiceProviderWidgets" EntityType="dmlmModel.ServiceProviderWidget" />
+          <EntitySet Name="Widgets" EntityType="dmlmModel.Widget" />
+          <AssociationSet Name="ServiceProviderServiceProviderWidget" Association="dmlmModel.ServiceProviderServiceProviderWidget">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="ServiceProviderWidget" EntitySet="ServiceProviderWidgets" />
+          </AssociationSet>
+          <AssociationSet Name="WidgetServiceProviderWidget" Association="dmlmModel.WidgetServiceProviderWidget">
+            <End Role="Widget" EntitySet="Widgets" />
+            <End Role="ServiceProviderWidget" EntitySet="ServiceProviderWidgets" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProviderServiceProviderWidgetRole" Association="dmlmModel.ServiceProviderServiceProviderWidgetRole">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="ServiceProviderWidgetRole" EntitySet="ServiceProviderWidgetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProviderWidgetRoleRole" Association="dmlmModel.ServiceProviderWidgetRoleRole">
+            <End Role="ServiceProviderWidgetRole" EntitySet="ServiceProviderWidgetRoles" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -768,6 +831,9 @@
           <NavigationProperty Name="Territories" Relationship="dmlmModel.ServiceProviderTerritory" FromRole="ServiceProvider" ToRole="Territory" />
           <NavigationProperty Name="UOMs" Relationship="dmlmModel.ServiceProviderUOM" FromRole="ServiceProvider" ToRole="UOM" />
           <NavigationProperty Name="Locations" Relationship="dmlmModel.ServiceProviderLocation" FromRole="ServiceProvider" ToRole="Location" />
+          <Property Name="layout" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ServiceProviderWidgets" Relationship="dmlmModel.ServiceProviderServiceProviderWidget" FromRole="ServiceProvider" ToRole="ServiceProviderWidget" />
+          <NavigationProperty Name="ServiceProviderWidgetRoles" Relationship="dmlmModel.ServiceProviderServiceProviderWidgetRole" FromRole="ServiceProvider" ToRole="ServiceProviderWidgetRole" />
         </EntityType>
         <EntityType Name="Territory">
           <Key>
@@ -816,6 +882,7 @@
           <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
           <Property Name="profileImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="profileImageIconUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserDevices" Relationship="dmlmModel.UserUserDevice" FromRole="User" ToRole="UserDevice" />
         </EntityType>
         <Association Name="OrganizationServiceProvider">
           <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -1238,7 +1305,110 @@
           <Property Name="userDeviceType" Type="Int32" Nullable="false" />
           <Property Name="userDeviceDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="dmlmModel.UserUserDevice" FromRole="UserDevice" ToRole="User" />
         </EntityType>
+        <Association Name="UserUserDevice">
+          <End Type="dmlmModel.User" Role="User" Multiplicity="1" />
+          <End Type="dmlmModel.UserDevice" Role="UserDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDevice">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ServiceProviderWidgetRole" Relationship="dmlmModel.ServiceProviderWidgetRoleRole" FromRole="Role" ToRole="ServiceProviderWidgetRole" />
+          <Property Name="ServiceProviderWidgetRoleId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceProviderWidgetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ServiceProviderWidgetID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderServiceProviderWidgetRole" FromRole="ServiceProviderWidgetRole" ToRole="ServiceProvider" />
+          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="dmlmModel.ServiceProviderWidgetRoleRole" FromRole="ServiceProviderWidgetRole" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="ServiceProviderWidget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ServiceProviderID" Type="Int32" Nullable="false" />
+          <Property Name="WidgetID" Type="Int32" Nullable="false" />
+          <Property Name="WidgetName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Priority" Type="Int32" />
+          <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderServiceProviderWidget" FromRole="ServiceProviderWidget" ToRole="ServiceProvider" />
+          <NavigationProperty Name="Widget" Relationship="dmlmModel.WidgetServiceProviderWidget" FromRole="ServiceProviderWidget" ToRole="Widget" />
+        </EntityType>
+        <EntityType Name="Widget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="WidgetName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultWidget" Type="Boolean" />
+          <Property Name="DefaultWidgetPriority" Type="Int32" />
+          <NavigationProperty Name="ServiceProviderWidget" Relationship="dmlmModel.WidgetServiceProviderWidget" FromRole="Widget" ToRole="ServiceProviderWidget" />
+        </EntityType>
+        <Association Name="ServiceProviderServiceProviderWidget">
+          <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="dmlmModel.ServiceProviderWidget" Role="ServiceProviderWidget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProviderWidget">
+              <PropertyRef Name="ServiceProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WidgetServiceProviderWidget">
+          <End Type="dmlmModel.Widget" Role="Widget" Multiplicity="1" />
+          <End Type="dmlmModel.ServiceProviderWidget" Role="ServiceProviderWidget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Widget">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProviderWidget">
+              <PropertyRef Name="WidgetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProviderServiceProviderWidgetRole">
+          <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="dmlmModel.ServiceProviderWidgetRole" Role="ServiceProviderWidgetRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceProviderWidgetRole">
+              <PropertyRef Name="ServiceProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProviderWidgetRoleRole">
+          <End Type="dmlmModel.ServiceProviderWidgetRole" Role="ServiceProviderWidgetRole" Multiplicity="1" />
+          <End Type="dmlmModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProviderWidgetRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="ServiceProviderWidgetRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1466,6 +1636,7 @@
           <EntitySetMapping Name="ServiceProviders">
             <EntityTypeMapping TypeName="dmlmModel.ServiceProvider">
               <MappingFragment StoreEntitySet="ServiceProvider">
+                <ScalarProperty Name="layout" ColumnName="layout" />
                 <ScalarProperty Name="businessPhoneNumber" ColumnName="businessPhoneNumber" />
                 <ScalarProperty Name="faxNumber" ColumnName="faxNumber" />
                 <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
@@ -1584,6 +1755,44 @@
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="userDeviceDate" ColumnName="userDeviceDate" />
                 <ScalarProperty Name="userDeviceType" ColumnName="userDeviceType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="dmlmModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceProviderWidgetRoles">
+            <EntityTypeMapping TypeName="dmlmModel.ServiceProviderWidgetRole">
+              <MappingFragment StoreEntitySet="ServiceProviderWidgetRole">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ServiceProviderWidgetID" ColumnName="ServiceProviderWidgetID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceProviderWidgets">
+            <EntityTypeMapping TypeName="dmlmModel.ServiceProviderWidget">
+              <MappingFragment StoreEntitySet="ServiceProviderWidgets">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="WidgetName" ColumnName="WidgetName" />
+                <ScalarProperty Name="WidgetID" ColumnName="WidgetID" />
+                <ScalarProperty Name="ServiceProviderID" ColumnName="ServiceProviderID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Widgets">
+            <EntityTypeMapping TypeName="dmlmModel.Widget">
+              <MappingFragment StoreEntitySet="Widget">
+                <ScalarProperty Name="DefaultWidgetPriority" ColumnName="DefaultWidgetPriority" />
+                <ScalarProperty Name="DefaultWidget" ColumnName="DefaultWidget" />
+                <ScalarProperty Name="WidgetName" ColumnName="WidgetName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

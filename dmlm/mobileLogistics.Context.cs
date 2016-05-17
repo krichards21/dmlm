@@ -50,5 +50,9 @@ namespace dmlm
         public virtual DbSet<LocationHour> LocationHours { get; set; }
         public virtual DbSet<UserAlert> UserAlerts { get; set; }
         public virtual DbSet<UserDevice> UserDevices { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<ServiceProviderWidgetRole> ServiceProviderWidgetRoles { get; set; }
+        public virtual DbSet<ServiceProviderWidget> ServiceProviderWidgets { get; set; }
+        public virtual DbSet<Widget> Widgets { get; set; }
     }
 }

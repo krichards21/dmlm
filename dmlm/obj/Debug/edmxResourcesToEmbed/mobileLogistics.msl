@@ -222,6 +222,7 @@
     <EntitySetMapping Name="ServiceProviders">
       <EntityTypeMapping TypeName="dmlmModel.ServiceProvider">
         <MappingFragment StoreEntitySet="ServiceProvider">
+          <ScalarProperty Name="layout" ColumnName="layout" />
           <ScalarProperty Name="businessPhoneNumber" ColumnName="businessPhoneNumber" />
           <ScalarProperty Name="faxNumber" ColumnName="faxNumber" />
           <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
@@ -264,6 +265,8 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="dmlmModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="profileImageIconUrl" ColumnName="profileImageIconUrl" />
+          <ScalarProperty Name="profileImageUrl" ColumnName="profileImageUrl" />
           <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="serviceProviderId" ColumnName="serviceProviderId" />
@@ -338,6 +341,44 @@
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="userDeviceDate" ColumnName="userDeviceDate" />
           <ScalarProperty Name="userDeviceType" ColumnName="userDeviceType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="dmlmModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceProviderWidgetRoles">
+      <EntityTypeMapping TypeName="dmlmModel.ServiceProviderWidgetRole">
+        <MappingFragment StoreEntitySet="ServiceProviderWidgetRole">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="ServiceProviderWidgetID" ColumnName="ServiceProviderWidgetID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceProviderWidgets">
+      <EntityTypeMapping TypeName="dmlmModel.ServiceProviderWidget">
+        <MappingFragment StoreEntitySet="ServiceProviderWidgets">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="WidgetName" ColumnName="WidgetName" />
+          <ScalarProperty Name="WidgetID" ColumnName="WidgetID" />
+          <ScalarProperty Name="ServiceProviderID" ColumnName="ServiceProviderID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Widgets">
+      <EntityTypeMapping TypeName="dmlmModel.Widget">
+        <MappingFragment StoreEntitySet="Widget">
+          <ScalarProperty Name="DefaultWidgetPriority" ColumnName="DefaultWidgetPriority" />
+          <ScalarProperty Name="DefaultWidget" ColumnName="DefaultWidget" />
+          <ScalarProperty Name="WidgetName" ColumnName="WidgetName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

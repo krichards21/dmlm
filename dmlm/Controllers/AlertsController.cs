@@ -41,7 +41,7 @@ namespace dmlm.Controllers
         [Route("GetAlerts/{id:int}")]
         public IHttpActionResult GetListAlerts(int id)
         {
-            return Ok(new Models.AlertModel().GetAlerts(1, 1));
+            return Ok(new Models.AlertModel().GetAlerts(1, id));
         }
 
         // PUT: api/Alerts/5

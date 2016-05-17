@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aadfd94606aa402390e33cc3d50a1f17" Name="Diagram1" ZoomLevel="66">
+      <Diagram DiagramId="aadfd94606aa402390e33cc3d50a1f17" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="dmlmModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.ContactItem" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="dmlmModel.DefaultUOM" Width="1.5" PointX="4.75" PointY="0.75" />
@@ -60,6 +60,15 @@
         <AssociationConnector Association="dmlmModel.LocationLocationHour" />
         <AssociationConnector Association="dmlmModel.LocationLocationClosedDate" />
         <EntityTypeShape EntityType="dmlmModel.UserDevice" Width="1.5" PointX="14.375" PointY="5.75" />
+        <AssociationConnector Association="dmlmModel.UserUserDevice" />
+        <EntityTypeShape EntityType="dmlmModel.Role" Width="1.5" PointX="6.375" PointY="18" />
+        <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidgetRole" Width="1.5" PointX="15.125" PointY="16.625" />
+        <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidget" Width="1.5" PointX="9.125" PointY="16.75" />
+        <EntityTypeShape EntityType="dmlmModel.Widget" Width="1.5" PointX="12.875" PointY="16.5" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderServiceProviderWidget" />
+        <AssociationConnector Association="dmlmModel.WidgetServiceProviderWidget" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderServiceProviderWidgetRole" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderWidgetRoleRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

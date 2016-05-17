@@ -10,6 +10,7 @@ namespace dmlm.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "Logistics Manager";
             return View();
         }
 
@@ -24,6 +25,16 @@ namespace dmlm.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Dashboard()
+        {
+            // TODO get these from the user object in the db
+            ViewBag.Message = "Dashboard";
+            ViewBag.Title = "Dashboard";
+            ViewBag.Layout = "~/Views/Shared/_SawyerLayout.cshtml";
+            ViewBag.ServiceProviderName = "Sawyer Brewing Company";
             return View();
         }
     }

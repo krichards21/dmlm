@@ -228,6 +228,7 @@
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UserAlertsController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DefaultUOM.cs">
@@ -282,6 +283,7 @@
     <Compile Include="Models\InventoryLocationsModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PageModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Organization.cs">
@@ -306,7 +308,16 @@
     <Compile Include="RegionUser.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
     <Compile Include="ServiceProvider.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderWidget.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderWidgetRole.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
@@ -325,6 +336,9 @@
     <Compile Include="UserDevice.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
+    <Compile Include="Widget.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -333,6 +347,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\sawyer\SawyerLogo.png" />
     <Content Include="mobileLogistics.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>mobileLogistics.edmx</DependentUpon>
@@ -419,6 +434,13 @@
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\UserAlerts\Create.cshtml" />
+    <Content Include="Views\UserAlerts\Delete.cshtml" />
+    <Content Include="Views\UserAlerts\Details.cshtml" />
+    <Content Include="Views\UserAlerts\Edit.cshtml" />
+    <Content Include="Views\UserAlerts\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Shared\_SawyerLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

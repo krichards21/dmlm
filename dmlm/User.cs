@@ -19,6 +19,7 @@ namespace dmlm
         {
             this.InventoryCounts = new HashSet<InventoryCount>();
             this.UserAlerts = new HashSet<UserAlert>();
+            this.UserDevices = new HashSet<UserDevice>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace dmlm
         public virtual ICollection<InventoryCount> InventoryCounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserAlert> UserAlerts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserDevice> UserDevices { get; set; }
     }
 }
