@@ -10,16 +10,17 @@ namespace dmlm.Models
         public class Page
         {
             public string Layout { get; set; }
-            public Dictionary<int, Widget> Widgets { get; set; }
+            public string ServiceProviderName { get; set; }
+            public List<Widget> Widgets { get; set; }
             public Role Role { get; set; }
         }
 
         public class Widget
         {
-            public string Name { get; }
-            public int Priority { get; set; }
+            public string Name { get; set; }
+            public int? Priority { get; set; }
             public string Location { get; set; }
-            public List<Role> Roles { get; set; }
+            public dmlm.Widget WidgetType { get; set; } 
         }
 
         public enum Role
@@ -50,8 +51,28 @@ namespace dmlm.Models
                 var page = new Page();
                 var serviceProvider = db.ServiceProviders.Find(serviceProviderID);
                 page.Layout = serviceProvider.layout;
+                page.ServiceProviderName = serviceProvider.name;
+                page.Role = (Role)user.role;
+
+                page.Widgets = new List<Widget>();
+                if (serviceProvider.ServiceProviderWidgets.Count > 0)
+                {
+                    foreach (var widget in serviceProvider.ServiceProviderWidgets.OrderBy(spw => spw.Priority))
+                    {
+                        if (widget.ServiceProviderWidgetRoles.Where(spw => spw.RoleID == user.role).Count() > 0)
+                        {
+                            page.Widgets.Add(new Widget
+                            {
+                                Name = widget.WidgetName,
+                                Location = string.Format("~/Views/Widgets/_{0}.cshtml", widget.Widget.WidgetName),
+                                Priority = widget.Priority,
+                                WidgetType = widget.Widget
+                            });
+                        }
+                    }
+                }
+                return page;
             }
-            return new Page();
         }
     }
 }

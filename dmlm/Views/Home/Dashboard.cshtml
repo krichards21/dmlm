@@ -1,12 +1,11 @@
-﻿@{
+﻿@model dmlm.Models.PageModel.Page
+@{
     Layout = ViewBag.Layout;
 }
 <div class="row">
-    <div class="col-lg-6">
-        Agents
-    </div>
-    <div>
-        Locations
-    </div>
+    @foreach (var widget in Model.Widgets)
+    {
+        Html.RenderPartial(widget.Location, Model);
+    }
 </div>
 

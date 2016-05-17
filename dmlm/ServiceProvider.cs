@@ -24,7 +24,6 @@ namespace dmlm
             this.UOMs = new HashSet<UOM>();
             this.Locations = new HashSet<Location>();
             this.ServiceProviderWidgets = new HashSet<ServiceProviderWidget>();
-            this.ServiceProviderWidgetRoles = new HashSet<ServiceProviderWidgetRole>();
         }
     
         public int Id { get; set; }
@@ -58,7 +57,5 @@ namespace dmlm
         public virtual ICollection<Location> Locations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceProviderWidget> ServiceProviderWidgets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ServiceProviderWidgetRole> ServiceProviderWidgetRoles { get; set; }
     }
 }

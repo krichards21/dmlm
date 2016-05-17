@@ -37,6 +37,7 @@ namespace dmlm
         public Nullable<System.DateTime> lastUpdateDate { get; set; }
         public string profileImageUrl { get; set; }
         public string profileImageIconUrl { get; set; }
+        public Nullable<int> role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventoryCount> InventoryCounts { get; set; }

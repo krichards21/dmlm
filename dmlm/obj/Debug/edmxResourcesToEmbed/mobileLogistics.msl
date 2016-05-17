@@ -265,6 +265,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="dmlmModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="role" ColumnName="role" />
           <ScalarProperty Name="profileImageIconUrl" ColumnName="profileImageIconUrl" />
           <ScalarProperty Name="profileImageUrl" ColumnName="profileImageUrl" />
           <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />

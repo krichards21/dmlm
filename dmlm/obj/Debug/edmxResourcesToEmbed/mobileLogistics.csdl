@@ -158,17 +158,17 @@
       <End Role="ServiceProvider" EntitySet="ServiceProviders" />
       <End Role="ServiceProviderWidget" EntitySet="ServiceProviderWidgets" />
     </AssociationSet>
+    <AssociationSet Name="ServiceProviderWidgetServiceProviderWidgetRole" Association="dmlmModel.ServiceProviderWidgetServiceProviderWidgetRole">
+      <End Role="ServiceProviderWidget" EntitySet="ServiceProviderWidgets" />
+      <End Role="ServiceProviderWidgetRole" EntitySet="ServiceProviderWidgetRoles" />
+    </AssociationSet>
     <AssociationSet Name="WidgetServiceProviderWidget" Association="dmlmModel.WidgetServiceProviderWidget">
       <End Role="Widget" EntitySet="Widgets" />
       <End Role="ServiceProviderWidget" EntitySet="ServiceProviderWidgets" />
     </AssociationSet>
-    <AssociationSet Name="ServiceProviderServiceProviderWidgetRole" Association="dmlmModel.ServiceProviderServiceProviderWidgetRole">
-      <End Role="ServiceProvider" EntitySet="ServiceProviders" />
-      <End Role="ServiceProviderWidgetRole" EntitySet="ServiceProviderWidgetRoles" />
-    </AssociationSet>
-    <AssociationSet Name="ServiceProviderWidgetRoleRole" Association="dmlmModel.ServiceProviderWidgetRoleRole">
-      <End Role="ServiceProviderWidgetRole" EntitySet="ServiceProviderWidgetRoles" />
+    <AssociationSet Name="RoleServiceProviderWidgetRole" Association="dmlmModel.RoleServiceProviderWidgetRole">
       <End Role="Role" EntitySet="Roles" />
+      <End Role="ServiceProviderWidgetRole" EntitySet="ServiceProviderWidgetRoles" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contact">
@@ -440,7 +440,6 @@
     <NavigationProperty Name="Locations" Relationship="dmlmModel.ServiceProviderLocation" FromRole="ServiceProvider" ToRole="Location" />
     <Property Name="layout" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ServiceProviderWidgets" Relationship="dmlmModel.ServiceProviderServiceProviderWidget" FromRole="ServiceProvider" ToRole="ServiceProviderWidget" />
-    <NavigationProperty Name="ServiceProviderWidgetRoles" Relationship="dmlmModel.ServiceProviderServiceProviderWidgetRole" FromRole="ServiceProvider" ToRole="ServiceProviderWidgetRole" />
   </EntityType>
   <EntityType Name="Territory">
     <Key>
@@ -490,6 +489,7 @@
     <Property Name="profileImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="profileImageIconUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="UserDevices" Relationship="dmlmModel.UserUserDevice" FromRole="User" ToRole="UserDevice" />
+    <Property Name="role" Type="Int32" />
   </EntityType>
   <Association Name="OrganizationServiceProvider">
     <End Type="dmlmModel.Organization" Role="Organization" Multiplicity="1" />
@@ -932,8 +932,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ServiceProviderWidgetRole" Relationship="dmlmModel.ServiceProviderWidgetRoleRole" FromRole="Role" ToRole="ServiceProviderWidgetRole" />
-    <Property Name="ServiceProviderWidgetRoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ServiceProviderWidgetRoles" Relationship="dmlmModel.RoleServiceProviderWidgetRole" FromRole="Role" ToRole="ServiceProviderWidgetRole" />
   </EntityType>
   <EntityType Name="ServiceProviderWidgetRole">
     <Key>
@@ -942,9 +941,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="ServiceProviderWidgetID" Type="Int32" Nullable="false" />
     <Property Name="RoleID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderServiceProviderWidgetRole" FromRole="ServiceProviderWidgetRole" ToRole="ServiceProvider" />
-    <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Roles" Relationship="dmlmModel.ServiceProviderWidgetRoleRole" FromRole="ServiceProviderWidgetRole" ToRole="Role" />
+    <NavigationProperty Name="ServiceProviderWidget" Relationship="dmlmModel.ServiceProviderWidgetServiceProviderWidgetRole" FromRole="ServiceProviderWidgetRole" ToRole="ServiceProviderWidget" />
+    <NavigationProperty Name="Role" Relationship="dmlmModel.RoleServiceProviderWidgetRole" FromRole="ServiceProviderWidgetRole" ToRole="Role" />
   </EntityType>
   <EntityType Name="ServiceProviderWidget">
     <Key>
@@ -956,6 +954,7 @@
     <Property Name="WidgetName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Priority" Type="Int32" />
     <NavigationProperty Name="ServiceProvider" Relationship="dmlmModel.ServiceProviderServiceProviderWidget" FromRole="ServiceProviderWidget" ToRole="ServiceProvider" />
+    <NavigationProperty Name="ServiceProviderWidgetRoles" Relationship="dmlmModel.ServiceProviderWidgetServiceProviderWidgetRole" FromRole="ServiceProviderWidget" ToRole="ServiceProviderWidgetRole" />
     <NavigationProperty Name="Widget" Relationship="dmlmModel.WidgetServiceProviderWidget" FromRole="ServiceProviderWidget" ToRole="Widget" />
   </EntityType>
   <EntityType Name="Widget">
@@ -966,7 +965,7 @@
     <Property Name="WidgetName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="DefaultWidget" Type="Boolean" />
     <Property Name="DefaultWidgetPriority" Type="Int32" />
-    <NavigationProperty Name="ServiceProviderWidget" Relationship="dmlmModel.WidgetServiceProviderWidget" FromRole="Widget" ToRole="ServiceProviderWidget" />
+    <NavigationProperty Name="ServiceProviderWidgets" Relationship="dmlmModel.WidgetServiceProviderWidget" FromRole="Widget" ToRole="ServiceProviderWidget" />
   </EntityType>
   <Association Name="ServiceProviderServiceProviderWidget">
     <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
@@ -977,6 +976,18 @@
       </Principal>
       <Dependent Role="ServiceProviderWidget">
         <PropertyRef Name="ServiceProviderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ServiceProviderWidgetServiceProviderWidgetRole">
+    <End Type="dmlmModel.ServiceProviderWidget" Role="ServiceProviderWidget" Multiplicity="1" />
+    <End Type="dmlmModel.ServiceProviderWidgetRole" Role="ServiceProviderWidgetRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceProviderWidget">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceProviderWidgetRole">
+        <PropertyRef Name="ServiceProviderWidgetID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -992,27 +1003,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ServiceProviderServiceProviderWidgetRole">
-    <End Type="dmlmModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+  <Association Name="RoleServiceProviderWidgetRole">
+    <End Type="dmlmModel.Role" Role="Role" Multiplicity="1" />
     <End Type="dmlmModel.ServiceProviderWidgetRole" Role="ServiceProviderWidgetRole" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ServiceProvider">
+      <Principal Role="Role">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ServiceProviderWidgetRole">
-        <PropertyRef Name="ServiceProviderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ServiceProviderWidgetRoleRole">
-    <End Type="dmlmModel.ServiceProviderWidgetRole" Role="ServiceProviderWidgetRole" Multiplicity="1" />
-    <End Type="dmlmModel.Role" Role="Role" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ServiceProviderWidgetRole">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Role">
-        <PropertyRef Name="ServiceProviderWidgetRoleId" />
+        <PropertyRef Name="RoleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -14,19 +14,11 @@ namespace dmlm
     
     public partial class ServiceProviderWidgetRole
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ServiceProviderWidgetRole()
-        {
-            this.Roles = new HashSet<Role>();
-        }
-    
         public int Id { get; set; }
         public int ServiceProviderWidgetID { get; set; }
         public int RoleID { get; set; }
-        public int ServiceProviderId { get; set; }
     
-        public virtual ServiceProvider ServiceProvider { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ServiceProviderWidget ServiceProviderWidget { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

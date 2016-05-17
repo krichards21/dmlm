@@ -14,6 +14,12 @@ namespace dmlm
     
     public partial class ServiceProviderWidget
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ServiceProviderWidget()
+        {
+            this.ServiceProviderWidgetRoles = new HashSet<ServiceProviderWidgetRole>();
+        }
+    
         public int Id { get; set; }
         public int ServiceProviderID { get; set; }
         public int WidgetID { get; set; }
@@ -21,6 +27,8 @@ namespace dmlm
         public Nullable<int> Priority { get; set; }
     
         public virtual ServiceProvider ServiceProvider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServiceProviderWidgetRole> ServiceProviderWidgetRoles { get; set; }
         public virtual Widget Widget { get; set; }
     }
 }

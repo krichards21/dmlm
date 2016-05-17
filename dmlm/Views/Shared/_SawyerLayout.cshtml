@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model dmlm.Models.PageModel.Page
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -34,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - @ViewBag.ServiceProviderName Logistics Manager</p>
+            <p>&copy; @DateTime.Now.Year - @Model.ServiceProviderName Logistics Manager</p>
         </footer>
     </div>
 

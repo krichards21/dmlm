@@ -8,6 +8,7 @@ namespace dmlm.Controllers
 {
     public class HomeController : Controller
     {
+        private dmlmEntities db = new dmlmEntities();
         public ActionResult Index()
         {
             ViewBag.Title = "Logistics Manager";
@@ -30,12 +31,14 @@ namespace dmlm.Controllers
 
         public ActionResult Dashboard()
         {
+            var user = db.Users.Find(1);
+            var pageModel = new Models.PageModel().GetPage(1, user);
+
             // TODO get these from the user object in the db
             ViewBag.Message = "Dashboard";
             ViewBag.Title = "Dashboard";
-            ViewBag.Layout = "~/Views/Shared/_SawyerLayout.cshtml";
-            ViewBag.ServiceProviderName = "Sawyer Brewing Company";
-            return View();
+            ViewBag.Layout = pageModel.Layout;
+            return View(pageModel);
         }
     }
 }

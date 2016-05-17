@@ -61,14 +61,18 @@
         <AssociationConnector Association="dmlmModel.LocationLocationClosedDate" />
         <EntityTypeShape EntityType="dmlmModel.UserDevice" Width="1.5" PointX="14.375" PointY="5.75" />
         <AssociationConnector Association="dmlmModel.UserUserDevice" />
-        <EntityTypeShape EntityType="dmlmModel.Role" Width="1.5" PointX="6.375" PointY="18" />
-        <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidgetRole" Width="1.5" PointX="15.125" PointY="16.625" />
-        <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidget" Width="1.5" PointX="9.125" PointY="16.75" />
-        <EntityTypeShape EntityType="dmlmModel.Widget" Width="1.5" PointX="12.875" PointY="16.5" />
         <AssociationConnector Association="dmlmModel.ServiceProviderServiceProviderWidget" />
         <AssociationConnector Association="dmlmModel.WidgetServiceProviderWidget" />
         <AssociationConnector Association="dmlmModel.ServiceProviderServiceProviderWidgetRole" />
         <AssociationConnector Association="dmlmModel.ServiceProviderWidgetRoleRole" />
+        <EntityTypeShape EntityType="dmlmModel.Role" Width="1.5" PointX="3.25" PointY="16.5" />
+        <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidgetRole" Width="1.5" PointX="9.25" PointY="17.25" />
+        <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidget" Width="1.5" PointX="5.25" PointY="17.5" />
+        <EntityTypeShape EntityType="dmlmModel.Widget" Width="1.5" PointX="7.25" PointY="17.5" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderServiceProviderWidget" />
+        <AssociationConnector Association="dmlmModel.ServiceProviderWidgetServiceProviderWidgetRole" />
+        <AssociationConnector Association="dmlmModel.WidgetServiceProviderWidget" />
+        <AssociationConnector Association="dmlmModel.RoleServiceProviderWidgetRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
