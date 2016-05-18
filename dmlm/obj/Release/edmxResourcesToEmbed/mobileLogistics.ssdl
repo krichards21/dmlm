@@ -242,6 +242,13 @@
     <Property Name="isActive" Type="bit" />
     <Property Name="isManager" Type="bit" />
   </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="ServiceProvider">
     <Key>
       <PropertyRef Name="Id" />
@@ -260,6 +267,25 @@
     <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
     <Property Name="faxNumber" Type="nchar" MaxLength="10" />
     <Property Name="businessPhoneNumber" Type="nchar" MaxLength="10" />
+    <Property Name="layout" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ServiceProviderWidgetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ServiceProviderWidgetID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServiceProviderWidgets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ServiceProviderID" Type="int" Nullable="false" />
+    <Property Name="WidgetID" Type="int" Nullable="false" />
+    <Property Name="WidgetName" Type="varchar" MaxLength="100" />
+    <Property Name="Priority" Type="int" />
   </EntityType>
   <EntityType Name="Territory">
     <Key>
@@ -300,6 +326,7 @@
     <Property Name="lastUpdateDate" Type="datetime" />
     <Property Name="profileImageUrl" Type="varchar" MaxLength="50" />
     <Property Name="profileImageIconUrl" Type="varchar" MaxLength="250" />
+    <Property Name="role" Type="int" />
   </EntityType>
   <EntityType Name="UserAlert">
     <Key>
@@ -317,6 +344,15 @@
     <Property Name="userDeviceType" Type="int" Nullable="false" />
     <Property Name="userDeviceDate" Type="datetime" Nullable="false" />
     <Property Name="userID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Widget">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="WidgetName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="DefaultWidget" Type="bit" />
+    <Property Name="DefaultWidgetPriority" Type="int" />
   </EntityType>
   <EntityContainer Name="dmlmModelStoreContainer">
     <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
@@ -338,11 +374,15 @@
     <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegionLocation" EntityType="Self.RegionLocation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegionUser" EntityType="Self.RegionUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ServiceProvider" EntityType="Self.ServiceProvider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceProviderWidgetRole" EntityType="Self.ServiceProviderWidgetRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceProviderWidgets" EntityType="Self.ServiceProviderWidgets" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Territory" EntityType="Self.Territory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAlert" EntityType="Self.UserAlert" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDevice" EntityType="Self.UserDevice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Widget" EntityType="Self.Widget" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
