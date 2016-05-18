@@ -69,9 +69,7 @@
         <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidgetRole" Width="1.5" PointX="9.25" PointY="17.25" />
         <EntityTypeShape EntityType="dmlmModel.ServiceProviderWidget" Width="1.5" PointX="5.25" PointY="17.5" />
         <EntityTypeShape EntityType="dmlmModel.Widget" Width="1.5" PointX="7.25" PointY="17.5" />
-        <AssociationConnector Association="dmlmModel.ServiceProviderServiceProviderWidget" />
         <AssociationConnector Association="dmlmModel.ServiceProviderWidgetServiceProviderWidgetRole" />
-        <AssociationConnector Association="dmlmModel.WidgetServiceProviderWidget" />
         <AssociationConnector Association="dmlmModel.RoleServiceProviderWidgetRole" />
       </Diagram>
     </edmx:Diagrams>

@@ -9,6 +9,7 @@ namespace dmlm.Models
     {
         public class Page
         {
+            public int ServiceProviderID { get; set; }
             public string Layout { get; set; }
             public string ServiceProviderName { get; set; }
             public List<Widget> Widgets { get; set; }
@@ -41,16 +42,18 @@ namespace dmlm.Models
             Category = 4,
             Reports = 5,
             Groups = 6,
-            Settings = 7
+            Settings = 7,
+            Regions = 8
         }
 
-        public Page GetPage(int serviceProviderID, User user)
+        public Page GetPage(User user)
         {
             using (dmlmEntities db = new dmlmEntities())
             {
                 var page = new Page();
-                var serviceProvider = db.ServiceProviders.Find(serviceProviderID);
+                var serviceProvider = db.ServiceProviders.Find(user.serviceProviderId);
                 page.Layout = serviceProvider.layout;
+                page.ServiceProviderID = user.serviceProviderId;
                 page.ServiceProviderName = serviceProvider.name;
                 page.Role = (Role)user.role;
 

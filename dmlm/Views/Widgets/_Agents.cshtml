@@ -1,3 +1,21 @@
-﻿<div class="col-lg-6" style="padding-top:200px; color:pink;">
-    Hello agents
+﻿@model dmlm.Models.PageModel.Page
+    @{ 
+        var agentModel = new dmlm.Models.AgentModel().GetAgent(Model);
+    }
+<div class="col-lg-6" style="margin-top:20px; border: 2px solid black; padding:10px;">
+    @{
+        <h2>@Model.Widgets.Where(w => w.WidgetType.Id == 1).FirstOrDefault().Name <a href="" style="float: right">North West Region</a></h2>
+        
+        foreach (var agent in agentModel.Take(10))
+        {
+            <div class="col-lg-6">
+                <text style="color:crimson;">@agent.Fullname</text>
+                <a href="" style="float:right;">Edit</a>
+            </div>
+            if (agentModel.Count() > 10)
+            {
+                <div style="float:right;"><a href="">...</a></div>
+            }
+        }
+    }
 </div>

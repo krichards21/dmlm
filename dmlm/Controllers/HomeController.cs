@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,8 +32,11 @@ namespace dmlm.Controllers
 
         public ActionResult Dashboard()
         {
-            var user = db.Users.Find(1);
-            var pageModel = new Models.PageModel().GetPage(1, user);
+            var username = User.Identity.GetUserName().ToLower();
+            var user = db.Users.Where(u => u.emailAddress.ToLower() == username).FirstOrDefault();
+            if (user == null)
+                return View();
+            var pageModel = new Models.PageModel().GetPage(user);
 
             // TODO get these from the user object in the db
             ViewBag.Message = "Dashboard";
