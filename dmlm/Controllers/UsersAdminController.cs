@@ -7,13 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using dmlm;
+using Microsoft.AspNet.Identity;
+using System.Web.Caching;
 
 namespace dmlm.Controllers
 {
     public class UsersAdminController : Controller
     {
         private dmlmEntities db = new dmlmEntities();
-
+        private Models.PageModel.Page UserPage = new Models.PageModel.Page();
+        protected override void OnActionExecuting(ActionExecutingContext ctx)
+        {
+            base.OnActionExecuting(ctx);
+            var pageModel = HttpContext.Cache.Get("pageModel");
+            if (pageModel != null)
+                UserPage = (Models.PageModel.Page)pageModel;
+            ViewBag.Layout = UserPage.Layout;
+        }
         // GET: UsersAdmin
         public ActionResult Index()
         {
@@ -46,7 +56,7 @@ namespace dmlm.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,firstName,lastName,title,employeeNumber,emailAddress,phoneNumber,cellPhoneNumber,isActive,createDate,serviceProviderId,password")] User user)
+        public ActionResult Create([Bind(Include = "Id,firstName,lastName,title,employeeNumber,emailAddress,phoneNumber,cellPhoneNumber,isActive,createDate,serviceProviderId,password,role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +88,7 @@ namespace dmlm.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,firstName,lastName,title,employeeNumber,emailAddress,phoneNumber,cellPhoneNumber,isActive,createDate,serviceProviderId,password")] User user)
+        public ActionResult Edit([Bind(Include = "Id,firstName,lastName,title,employeeNumber,emailAddress,phoneNumber,cellPhoneNumber,isActive,createDate,serviceProviderId,password,role")] User user)
         {
             if (ModelState.IsValid)
             {

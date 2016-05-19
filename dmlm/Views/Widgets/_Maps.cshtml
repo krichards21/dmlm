@@ -1,0 +1,47 @@
+﻿@model dmlm.Models.PageModel.Page
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (p) {
+        var LatLng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+        var mapOptions = {
+            center: LatLng,
+            zoom: 13,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map
+        });
+        var map1 = new google.maps.Map(document.getElementById("dvMapSm"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map1
+        });
+        google.maps.event.addDomListener(window, "resize", function () {
+            var center = map1.getCenter();
+            google.maps.event.trigger(map1, "resize");
+            map1.setCenter(center);
+        });
+        //google.maps.event.addListener(marker, "click", function (e) {
+        //    var infoWindow = new google.maps.InfoWindow();
+        //    infoWindow.setContent(marker.title);
+        //    infoWindow.open(map, marker);
+        //});
+        google.maps.event.addDomListener(window, "resize", function () {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        });
+    });
+} else {
+    alert('Geo Location feature is not supported in this browser.');
+}
+</script>
+<div class="col-lg-4">
+    <div>@Model.Widgets.Where(w => w.WidgetType.Id == (int)dmlm.Models.PageModel.Widgets.Maps).FirstOrDefault().Name</div>
+    <div id="dvMap" class="hidden-xs" style="width: 600px; height: 600px"></div>
+    <div id="dvMapSm" class="hidden-sm hidden-md hidden-lg hidden-xl" style="width: 300px; height: 300px"></div>
+</div>

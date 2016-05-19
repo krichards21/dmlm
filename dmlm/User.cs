@@ -11,7 +11,7 @@ namespace dmlm
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,6 +33,7 @@ namespace dmlm
         public Nullable<bool> isActive { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public int serviceProviderId { get; set; }
+        [DataType(DataType.Password)]
         public string password { get; set; }
         public Nullable<System.DateTime> lastUpdateDate { get; set; }
         public string profileImageUrl { get; set; }

@@ -2,16 +2,18 @@
     @{ 
         var agentModel = new dmlm.Models.AgentModel().GetAgent(Model);
     }
+<script src="~/Scripts/popup.js"></script>
+@Styles.Render("~/Content/Site.css")
 <div style="background-color:lightgray;">
     <div class="col-lg-8" style="margin-top:20px; border: 2px solid black; padding:10px;">
         @{
-            <h2>@Model.Widgets.Where(w => w.WidgetType.Id == 1).FirstOrDefault().Name <a href="" style="float: right">North West Region</a></h2>
+            <h2>@Model.Widgets.Where(w => w.WidgetType.Id == 1).FirstOrDefault().Name <a id="region" style="float: right">North West Region</a></h2>
 
             foreach (var agent in agentModel.Take(10))
             {
                 <div class="col-lg-6">
                     <text style="color:crimson;">@agent.Fullname</text>
-                    <a href="" style="float:right;">Edit</a>
+                    @Html.ActionLink("Edit", "Edit", "UsersAdmin", new { id = agent.Id }, new { @class = "regionEdit" })
                 </div>
                 if (agentModel.Count() > 10)
                 {
@@ -31,3 +33,14 @@
         </form>
     </div>
 </div>
+<script>
+    var myPopup = new smq.Popup({
+        title: 'Popup.js Example',
+        innerHtml: '<div><a id="region" style="float: right">South West Region</a><br/><a id="regionClose" style="float: right">South West Region</a><br/></div>'
+    });
+    $(document).ready(function () {
+        $("#region").click(function () {
+            myPopup.show();
+        });
+    });
+</script>
