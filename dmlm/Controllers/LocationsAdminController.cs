@@ -13,7 +13,15 @@ namespace dmlm.Controllers
     public class LocationsAdminController : Controller
     {
         private dmlmEntities db = new dmlmEntities();
-
+        private Models.PageModel.Page UserPage = new Models.PageModel.Page();
+        protected override void OnActionExecuting(ActionExecutingContext ctx)
+        {
+            base.OnActionExecuting(ctx);
+            var pageModel = HttpContext.Cache.Get("pageModel");
+            if (pageModel != null)
+                UserPage = (Models.PageModel.Page)pageModel;
+            ViewBag.Layout = UserPage.Layout;
+        }
         // GET: LocationsAdmin
         public ActionResult Index()
         {

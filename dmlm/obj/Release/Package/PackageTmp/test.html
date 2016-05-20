@@ -1,53 +1,51 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-    <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
-    <script src="/Scripts/Chart.min.js"></script>
-    <script>
-        var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
-        var lineChartData = {
-            //labels: ["January", "February", "March", "April", "May", "June", "July"],
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "Query Count",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    //data: [0, 1, 4, 6, 10, 8, 6]
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    //data: [28, 48, 40, 19, 86, 27, 90]
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-            ]
-        }
-        function DrawChart() {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myLine = new Chart(ctx).Line(lineChartData, {
-                responsive: true
-            });
-        }
-    </script>
-</head>
-<body>
-    <div class="col-lg-6" style="width: 100%">
-        <div>
-            <canvas id="canvas" height="250" width="400"></canvas>
-        </div>
+﻿
+<script src="/Scripts/Chart.min.js"></script>
+<div class="col-lg-6" style="width: 100%">
+    <div>
+        <canvas id="myChart" height="400" width="400"></canvas>
     </div>
-</body>
-</html>
+</div>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            //labels: ["Mark Kidwell", "Ben Mcadoo", "Kimate Richards", "Green", "Purple", "Orange"],
+            labels: ["Mark Kidwell", "Ben Mcadoo", "Kimate Richards", "Michael Jackson", "Rogers Nelson", "Leia Organa"],
+            datasets: [{
+                label: '# of Site Visits',
+                data: [12, 15, 3, 5, 19, 3]
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+    
+<style>
+
+
+        #map {
+            height: 500px;
+        }
+    </style>
+
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLVr49f8utsLypg6SRNfGriBswv2yY78I&callback=initMap"
+            async defer></script>

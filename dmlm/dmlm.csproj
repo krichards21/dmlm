@@ -227,6 +227,9 @@
     <Compile Include="Controllers\LocationsAdminController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManufacturersAdminController.cs" />
+    <Compile Include="Controllers\ProductCategoriesController.cs" />
+    <Compile Include="Controllers\ProductsAdminController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UserAlertsController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
@@ -453,6 +456,22 @@
     <Content Include="Views\Widgets\_Agents.cshtml" />
     <Content Include="Views\Widgets\_Locations.cshtml" />
     <Content Include="Views\Widgets\_Maps.cshtml" />
+    <Content Include="Views\Widgets\_Map_Pin.cshtml" />
+    <Content Include="Views\ProductCategories\Create.cshtml" />
+    <Content Include="Views\ProductCategories\Delete.cshtml" />
+    <Content Include="Views\ProductCategories\Details.cshtml" />
+    <Content Include="Views\ProductCategories\Edit.cshtml" />
+    <Content Include="Views\ProductCategories\Index.cshtml" />
+    <Content Include="Views\ProductsAdmin\Create.cshtml" />
+    <Content Include="Views\ProductsAdmin\Delete.cshtml" />
+    <Content Include="Views\ProductsAdmin\Details.cshtml" />
+    <Content Include="Views\ProductsAdmin\Edit.cshtml" />
+    <Content Include="Views\ProductsAdmin\Index.cshtml" />
+    <Content Include="Views\ManufacturersAdmin\Create.cshtml" />
+    <Content Include="Views\ManufacturersAdmin\Delete.cshtml" />
+    <Content Include="Views\ManufacturersAdmin\Details.cshtml" />
+    <Content Include="Views\ManufacturersAdmin\Edit.cshtml" />
+    <Content Include="Views\ManufacturersAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

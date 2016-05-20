@@ -10,7 +10,7 @@ using dmlm;
 
 namespace dmlm.Controllers
 {
-    public class AlertsAdminController : Controller
+    public class ManufacturersAdminController : Controller
     {
         private dmlmEntities db = new dmlmEntities();
         private Models.PageModel.Page UserPage = new Models.PageModel.Page();
@@ -23,106 +23,103 @@ namespace dmlm.Controllers
             ViewBag.Layout = UserPage.Layout;
         }
 
-        // GET: AlertsAdmin
+        // GET: ManufacturersAdmin
         public ActionResult Index()
         {
-            return View(db.Alerts.ToList());
+            return View(db.Manufacturers.ToList());
         }
 
-        // GET: AlertsAdmin/Details/5
+        // GET: ManufacturersAdmin/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            if (manufacturer == null)
             {
                 return HttpNotFound();
             }
-            return View(alert);
+            return View(manufacturer);
         }
 
-        // GET: AlertsAdmin/Create
+        // GET: ManufacturersAdmin/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AlertsAdmin/Create
+        // POST: ManufacturersAdmin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "alertType,description,link")] Alert alert)
+        public ActionResult Create([Bind(Include = "Id,name,description,serviceProviderId")] Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
             {
-                alert.Id = db.Alerts.Max(i => i.Id) + 1;
-                alert.serviceProviderID = 1;
-                alert.createDate = DateTime.UtcNow;
-                db.Alerts.Add(alert);
+                db.Manufacturers.Add(manufacturer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(alert);
+            return View(manufacturer);
         }
 
-        // GET: AlertsAdmin/Edit/5
+        // GET: ManufacturersAdmin/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            if (manufacturer == null)
             {
                 return HttpNotFound();
             }
-            return View(alert);
+            return View(manufacturer);
         }
 
-        // POST: AlertsAdmin/Edit/5
+        // POST: ManufacturersAdmin/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,alertType,description,serviceProviderID,link")] Alert alert)
+        public ActionResult Edit([Bind(Include = "Id,name,description,serviceProviderId")] Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(alert).State = EntityState.Modified;
+                db.Entry(manufacturer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(alert);
+            return View(manufacturer);
         }
 
-        // GET: AlertsAdmin/Delete/5
+        // GET: ManufacturersAdmin/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            if (manufacturer == null)
             {
                 return HttpNotFound();
             }
-            return View(alert);
+            return View(manufacturer);
         }
 
-        // POST: AlertsAdmin/Delete/5
+        // POST: ManufacturersAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Alert alert = db.Alerts.Find(id);
-            db.Alerts.Remove(alert);
+            Manufacturer manufacturer = db.Manufacturers.Find(id);
+            db.Manufacturers.Remove(manufacturer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

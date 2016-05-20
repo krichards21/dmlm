@@ -29,9 +29,9 @@
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dashboard <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">People</a></li>
-                            <li><a href="#">Locations</a></li>
-                            <li><a href="#">Products</a></li>
+                            <li>@Html.ActionLink("People", "Index", "UsersAdmin")</li>
+                            <li>@Html.ActionLink("Locations", "Index", "LocationsAdmin")</li>
+                            <li>@Html.ActionLink("Products", "Index", "ProductsAdmin")</li>
                             <li class="divider"></li>
                             <li><a href="#">Orders</a></li>
                         </ul>

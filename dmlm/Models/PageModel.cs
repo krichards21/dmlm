@@ -43,7 +43,8 @@ namespace dmlm.Models
             Reports = 5,
             Groups = 6,
             Regions = 7,
-            Maps = 8
+            Maps = 8,
+            MapPins = 9
         }
 
         public Page GetPage(User user)

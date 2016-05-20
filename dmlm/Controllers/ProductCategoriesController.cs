@@ -10,7 +10,7 @@ using dmlm;
 
 namespace dmlm.Controllers
 {
-    public class AlertsAdminController : Controller
+    public class ProductCategoriesController : Controller
     {
         private dmlmEntities db = new dmlmEntities();
         private Models.PageModel.Page UserPage = new Models.PageModel.Page();
@@ -23,106 +23,108 @@ namespace dmlm.Controllers
             ViewBag.Layout = UserPage.Layout;
         }
 
-        // GET: AlertsAdmin
+        // GET: ProductCategories
         public ActionResult Index()
         {
-            return View(db.Alerts.ToList());
+            var productCategories = db.ProductCategories.Include(p => p.ServiceProvider);
+            return View(productCategories.ToList());
         }
 
-        // GET: AlertsAdmin/Details/5
+        // GET: ProductCategories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            ProductCategory productCategory = db.ProductCategories.Find(id);
+            if (productCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(alert);
+            return View(productCategory);
         }
 
-        // GET: AlertsAdmin/Create
+        // GET: ProductCategories/Create
         public ActionResult Create()
         {
+            ViewBag.serviceProviderId = new SelectList(db.ServiceProviders, "Id", "name");
             return View();
         }
 
-        // POST: AlertsAdmin/Create
+        // POST: ProductCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "alertType,description,link")] Alert alert)
+        public ActionResult Create([Bind(Include = "Id,name,description,serviceProviderId")] ProductCategory productCategory)
         {
             if (ModelState.IsValid)
             {
-                alert.Id = db.Alerts.Max(i => i.Id) + 1;
-                alert.serviceProviderID = 1;
-                alert.createDate = DateTime.UtcNow;
-                db.Alerts.Add(alert);
+                db.ProductCategories.Add(productCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(alert);
+            ViewBag.serviceProviderId = new SelectList(db.ServiceProviders, "Id", "name", productCategory.serviceProviderId);
+            return View(productCategory);
         }
 
-        // GET: AlertsAdmin/Edit/5
+        // GET: ProductCategories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            ProductCategory productCategory = db.ProductCategories.Find(id);
+            if (productCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(alert);
+            ViewBag.serviceProviderId = new SelectList(db.ServiceProviders, "Id", "name", productCategory.serviceProviderId);
+            return View(productCategory);
         }
 
-        // POST: AlertsAdmin/Edit/5
+        // POST: ProductCategories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,alertType,description,serviceProviderID,link")] Alert alert)
+        public ActionResult Edit([Bind(Include = "Id,name,description,serviceProviderId")] ProductCategory productCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(alert).State = EntityState.Modified;
+                db.Entry(productCategory).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(alert);
+            ViewBag.serviceProviderId = new SelectList(db.ServiceProviders, "Id", "name", productCategory.serviceProviderId);
+            return View(productCategory);
         }
 
-        // GET: AlertsAdmin/Delete/5
+        // GET: ProductCategories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Alert alert = db.Alerts.Find(id);
-            if (alert == null)
+            ProductCategory productCategory = db.ProductCategories.Find(id);
+            if (productCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(alert);
+            return View(productCategory);
         }
 
-        // POST: AlertsAdmin/Delete/5
+        // POST: ProductCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Alert alert = db.Alerts.Find(id);
-            db.Alerts.Remove(alert);
+            ProductCategory productCategory = db.ProductCategories.Find(id);
+            db.ProductCategories.Remove(productCategory);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,0 +1,61 @@
+﻿@model dmlm.Models.PageModel.Page
+
+<div class="col-lg-6">
+    <div style="font-size:28px; font-weight:bold">@Model.Widgets.Where(w => w.WidgetType.Id == (int)dmlm.Models.PageModel.Widgets.MapPins).FirstOrDefault().Name</div>
+    <style>
+        .mapPin {
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+    <div id="mapPin" class="mapPin"></div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('mapPin'), {
+                zoom: 12,
+                center: { lat: 37.775, lng: -122.4194200 }
+            });
+            setMarkers(map);
+        }
+            var agents = [
+              ['Mark Kidwell', 37.772, -122.410, 4],
+              ['Kimate Richards', 37.7751, -122.4094014, 5],
+              ['Ben Macadoo', 37.77546, -122.4194207, 3],
+              ['Michael Jackson', 37.7751447, -122.419443545, 6],
+              ['Rogers Nelson', 37.7844447, -122.4084014, 2],
+              ['Leia Organa', 37.76514562, -122.41558447, 1]
+            ];
+            function setMarkers(map) {
+                var image = {
+                    url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                    // This marker is 20 pixels wide by 32 pixels high.
+                    size: new google.maps.Size(20, 32),
+                    // The origin for this image is (0, 0).
+                    origin: new google.maps.Point(0, 0),
+                    // The anchor for this image is the base of the flagpole at (0, 32).
+                    anchor: new google.maps.Point(0, 32)
+                };
+                // Shapes define the clickable region of the icon. The type defines an HTML
+                // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                // The final coordinate closes the poly by connecting to the first coordinate.
+                var shape = {
+                    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                    type: 'poly'
+                };
+                for (var i = 0; i < agents.length; i++) {
+                    var agent = agents[i];
+                    var marker = new google.maps.Marker({
+                        position: { lat: agent[1], lng: agent[2] },
+                        map: map,
+                        icon: image,
+                        shape: shape,
+                        title: agent[0],
+                        zIndex: agent[3]
+                    });
+                }
+            }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLVr49f8utsLypg6SRNfGriBswv2yY78I&callback=initMap">
+    </script>
+</div>
