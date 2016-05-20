@@ -224,11 +224,14 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryCountsController.cs" />
+    <Compile Include="Controllers\InventoryCountsManagerController.cs" />
+    <Compile Include="Controllers\InventoryLocationsController.cs" />
     <Compile Include="Controllers\LocationsAdminController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturersAdminController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
+    <Compile Include="Controllers\ProductInventoryLocationsController.cs" />
     <Compile Include="Controllers\ProductsAdminController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UserAlertsController.cs" />
@@ -472,6 +475,21 @@
     <Content Include="Views\ManufacturersAdmin\Details.cshtml" />
     <Content Include="Views\ManufacturersAdmin\Edit.cshtml" />
     <Content Include="Views\ManufacturersAdmin\Index.cshtml" />
+    <Content Include="Views\ProductInventoryLocations\Create.cshtml" />
+    <Content Include="Views\ProductInventoryLocations\Delete.cshtml" />
+    <Content Include="Views\ProductInventoryLocations\Details.cshtml" />
+    <Content Include="Views\ProductInventoryLocations\Edit.cshtml" />
+    <Content Include="Views\ProductInventoryLocations\Index.cshtml" />
+    <Content Include="Views\InventoryLocations\Create.cshtml" />
+    <Content Include="Views\InventoryLocations\Delete.cshtml" />
+    <Content Include="Views\InventoryLocations\Details.cshtml" />
+    <Content Include="Views\InventoryLocations\Edit.cshtml" />
+    <Content Include="Views\InventoryLocations\Index.cshtml" />
+    <Content Include="Views\InventoryCountsManager\Create.cshtml" />
+    <Content Include="Views\InventoryCountsManager\Delete.cshtml" />
+    <Content Include="Views\InventoryCountsManager\Details.cshtml" />
+    <Content Include="Views\InventoryCountsManager\Edit.cshtml" />
+    <Content Include="Views\InventoryCountsManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

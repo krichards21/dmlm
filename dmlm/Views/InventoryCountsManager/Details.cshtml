@@ -1,0 +1,75 @@
+﻿@model dmlm.InventoryCount
+
+@{
+    Layout = null;
+    Layout = ViewBag.Layout;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>InventoryCount</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.count)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.count)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.updateDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.updateDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Product.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.InventoryLocation.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.InventoryLocation.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UOM.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UOM.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.User.firstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.User.firstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
