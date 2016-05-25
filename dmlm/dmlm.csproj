@@ -213,6 +213,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
     <Compile Include="Contact.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
@@ -237,9 +249,13 @@
     <Compile Include="Controllers\UserAlertsController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>mobileLogistics.tt</DependentUpon>
+    </Compile>
     <Compile Include="DefaultUOM.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>
     </Compile>
+    <Compile Include="Filter\LoginFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -490,6 +506,7 @@
     <Content Include="Views\InventoryCountsManager\Details.cshtml" />
     <Content Include="Views\InventoryCountsManager\Edit.cshtml" />
     <Content Include="Views\InventoryCountsManager\Index.cshtml" />
+    <Content Include="Views\Account\ProxyRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,6 +19,8 @@ namespace dmlm
             );
             config.Formatters.JsonFormatter.AddUriPathExtensionMapping("json", "application/json");
             config.Formatters.XmlFormatter.AddUriPathExtensionMapping("xml", "text/xml");
+
+            config.Filters.Add(new AuthorizeAttribute());
         }
     }
 }

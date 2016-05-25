@@ -11,7 +11,7 @@ namespace dmlm
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,12 +33,13 @@ namespace dmlm
         public Nullable<bool> isActive { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
         public int serviceProviderId { get; set; }
-        [DataType(DataType.Password)]
         public string password { get; set; }
         public Nullable<System.DateTime> lastUpdateDate { get; set; }
         public string profileImageUrl { get; set; }
         public string profileImageIconUrl { get; set; }
         public Nullable<int> role { get; set; }
+        public Nullable<System.DateTime> loginDate { get; set; }
+        public string aspUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventoryCount> InventoryCounts { get; set; }
@@ -46,5 +47,6 @@ namespace dmlm
         public virtual ICollection<UserAlert> UserAlerts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDevice> UserDevices { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

@@ -1,0 +1,147 @@
+﻿@model dmlm.Product
+
+@{
+    Layout = null;
+    Layout = ViewBag.Layout;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.createDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.createDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.urlPrimaryImage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.urlPrimaryImage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.urlProduct)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.urlProduct)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.upc)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.upc)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.partNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.partNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.stockingCode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.stockingCode)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.serviceProviderId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.serviceProviderId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.updateDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.updateDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.endDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.endDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.isActive)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.isActive)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductCategory.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProductCategory.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UOM.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UOM.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Manufacturer.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Manufacturer.name)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

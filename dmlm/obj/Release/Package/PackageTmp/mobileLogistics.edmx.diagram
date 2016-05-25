@@ -71,6 +71,15 @@
         <EntityTypeShape EntityType="dmlmModel.Widget" Width="1.5" PointX="7.25" PointY="17.5" />
         <AssociationConnector Association="dmlmModel.ServiceProviderWidgetServiceProviderWidgetRole" />
         <AssociationConnector Association="dmlmModel.RoleServiceProviderWidgetRole" />
+        <EntityTypeShape EntityType="dmlmModel.C__MigrationHistory" Width="1.5" PointX="15.375" PointY="1.25" />
+        <EntityTypeShape EntityType="dmlmModel.AspNetRole" Width="1.5" PointX="11.375" PointY="18" />
+        <EntityTypeShape EntityType="dmlmModel.AspNetUserClaim" Width="1.5" PointX="15.875" PointY="19.125" />
+        <EntityTypeShape EntityType="dmlmModel.AspNetUserLogin" Width="1.5" PointX="15.875" PointY="16.5" />
+        <EntityTypeShape EntityType="dmlmModel.AspNetUser" Width="1.5" PointX="13.625" PointY="16.875" />
+        <AssociationConnector Association="dmlmModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="dmlmModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="dmlmModel.AspNetUserRoles" />
+        <AssociationConnector Association="dmlmModel.AspNetUserUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

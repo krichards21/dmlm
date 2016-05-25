@@ -9,12 +9,23 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using dmlm;
+using dmlm.Models;
+using dmlm.Filter;
 
 namespace dmlm.Controllers
 {
     [RoutePrefix("Alerts")]
     public class AlertsController : ApiController
     {
+        //private bool _isAuth = false;
+        //private int _serviceProviderID = 0; 
+        //public void AlertController()
+        //{
+        //    int.TryParse(Request.Headers.GetValues("ServiceProviderID").First(), out _serviceProviderID);
+        //    var accessToken = Request.Headers.GetValues("AccessToken").First();
+        //    var userID = Request.Headers.GetValues("UserID").First();
+        //    _isAuth = new Models.UserModel().CheckAccessToken(accessToken, userID);
+        //}
         private dmlmEntities db = new dmlmEntities();
 
         //// GET: api/Alerts
@@ -38,6 +49,7 @@ namespace dmlm.Controllers
 
         // GET: api/Locations/5
         [ResponseType(typeof(Models.LocationModel.Location))]
+        [LoginFilter]
         [Route("GetAlerts/{id:int}")]
         public IHttpActionResult GetListAlerts(int id)
         {

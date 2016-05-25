@@ -72,12 +72,12 @@ namespace dmlm.Controllers
         }
 
         // POST: api/Login
-        [ResponseType(typeof(Models.UserModel.User))]
-        [Route("LoginUser/")]
-        public IHttpActionResult LoginUser(Models.UserModel.LoginModel loginModel)
-        {
-            return Ok(new Models.UserModel().GetUserByEmailandPwd(loginModel));
-        }
+        //[ResponseType(typeof(Models.UserModel.User))]
+        //[Route("LoginUser/")]
+        //public IHttpActionResult PostLoginUser(Models.UserModel.LoginModel loginModel)
+        //{
+        //    return Ok(new Models.UserModel().GetUserByEmailandPwd(loginModel));
+        //}
 
         // POST: api/Users
         [ResponseType(typeof(User))]

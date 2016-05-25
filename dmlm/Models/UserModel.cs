@@ -1,40 +1,53 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+
 using System.Web;
+using System.Web.Security;
 
 namespace dmlm.Models
 {
     public class UserModel
     {
-        public class User
+        public bool CheckAccessToken(string accessToken, string id, DbContext ctx)
         {
-            public int UserID { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public DateTime LastUpdateDate { get; set; }
+            var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //var store = new UserStore<ApplicationUser>(ctx);
+            //var manager = new UserManager<ApplicationUser>(store);
+            var user = manager.Users.Where(u => u.Id == id).FirstOrDefault();
+            //var tokens = manager.UserTokenProvider.ValidateAsync("MobileAuth", accessToken, manager, user);
+            return manager.VerifyUserToken(id, "MobileAuth", accessToken);
         }
-
         public class LoginModel
         {
-            public string Email { get; set; }
-            public string Password { get; set; }
+            public string AccessToken { get; set; }
+            public string AspUserID { get; set; }
         }
 
-        public User GetUserByEmailandPwd(LoginModel loginModel)
+        public dmlm.User LoginUser(string email)
         {
             using (dmlmEntities db = new dmlmEntities())
             {
-                var user = new User();
-                // need password encryption 
-                var userEntity = db.Users.Where(u => u.emailAddress.ToLower() == loginModel.Email.ToLower() && u.password.ToLower() == loginModel.Password.ToLower()).FirstOrDefault();
-                if (userEntity == null)
-                    throw new KeyNotFoundException();
-                user.FirstName = userEntity.firstName;
-                user.LastName = userEntity.lastName;
-                user.UserID = userEntity.Id;
-                user.LastUpdateDate = userEntity.lastUpdateDate ?? DateTime.UtcNow.AddDays(-100);
-                return user;
+                var user = new dmlm.User();
+                    var userEntity = db.Users.Where(u => u.emailAddress.ToLower() == email.ToLower()).FirstOrDefault();
+                    if (userEntity == null)
+                        throw new KeyNotFoundException();
+                    user.loginDate = userEntity.lastUpdateDate ?? DateTime.UtcNow.AddDays(-100);
+                    return user;
+            }
+        }
+
+        public bool ModifyUser(dmlm.User user)
+        {
+            using (dmlmEntities db = new dmlmEntities())
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return true;
             }
         }
     }

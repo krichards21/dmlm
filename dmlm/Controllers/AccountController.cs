@@ -9,14 +9,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using dmlm.Models;
+using System.Web.Http;
+using Microsoft.Owin.Security.DataProtection;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace dmlm.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private Models.PageModel.Page UserPage = new Models.PageModel.Page();
 
         public AccountController()
         {
@@ -54,7 +58,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/Login
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -63,8 +67,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
@@ -91,9 +95,43 @@ namespace dmlm.Controllers
             }
         }
 
+        // POST: /Account/Login
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.AllowAnonymous]
+        public async Task<JsonResult> ApiLogin(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+            var user = await UserManager.FindAsync(model.Email, model.Password);
+            var token = UserManager.GenerateUserToken("MobileAuth", user.Id);
+            //var token = SignInManager.UserManager.GenerateUserToken("MobileAuth", user.Id);
+            var loginModel = new dmlm.Models.UserModel.LoginModel() { AccessToken = token, AspUserID = user.Id };
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    var userModel = new UserModel().LoginUser(model.Email);
+                    return Json(loginModel);
+                case SignInStatus.LockedOut:
+                    return Json(result);
+                case SignInStatus.RequiresVerification:
+                    return Json(result);
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return Json(result);
+            }
+        }
+
         //
         // GET: /Account/VerifyCode
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -106,8 +144,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/VerifyCode
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
@@ -136,7 +174,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -144,8 +182,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -173,8 +211,60 @@ namespace dmlm.Controllers
         }
 
         //
+        // GET: /Account/Register
+        [System.Web.Mvc.AllowAnonymous]
+        public ActionResult ProxyRegister()
+        {
+            var username = User.Identity.GetUserName().ToLower();
+            using (dmlmEntities db = new dmlmEntities())
+            {
+                var user = db.Users.Where(u => u.emailAddress.ToLower() == username).FirstOrDefault();
+                if (user == null)
+                    return View();
+                var pageModel = new Models.PageModel().GetPage(user);
+                ViewBag.Message = "Register User";
+                ViewBag.Title = "Register User";
+                ViewBag.Layout = pageModel.Layout;
+            }
+            return View();
+        }
+
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProxyRegister(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    using (dmlmEntities db = new dmlmEntities())
+                    {
+                        var userEntity = new dmlm.User();
+                        userEntity.createDate = DateTime.UtcNow;
+                        userEntity.aspUserID = UserManager.FindByEmail(model.Email).Id;
+                        userEntity.emailAddress = model.Email;
+                        userEntity.Id = db.Users.Max(u => u == null ? 0 : u.Id) + 1;
+                        db.Users.Add(userEntity);
+                        db.SaveChanges();
+                        return RedirectToAction("Edit", "UsersAdmin", new { id = userEntity.Id });
+                    }
+                }
+                AddErrors(result);
+            }
+            var pageModel = HttpContext.Cache.Get("pageModel");
+            if (pageModel != null)
+                UserPage = (Models.PageModel.Page)pageModel;
+            ViewBag.Layout = UserPage.Layout;
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
         // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -187,7 +277,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/ForgotPassword
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -195,8 +285,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/ForgotPassword
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -223,7 +313,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
@@ -231,7 +321,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/ResetPassword
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
@@ -239,8 +329,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
@@ -265,7 +355,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
@@ -273,8 +363,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
@@ -284,7 +374,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/SendCode
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -299,8 +389,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/SendCode
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
@@ -319,7 +409,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -349,8 +439,8 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
-        [AllowAnonymous]
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Mvc.AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
@@ -387,7 +477,7 @@ namespace dmlm.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -397,7 +487,7 @@ namespace dmlm.Controllers
 
         //
         // GET: /Account/ExternalLoginFailure
-        [AllowAnonymous]
+        [System.Web.Mvc.AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
