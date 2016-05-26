@@ -108,15 +108,14 @@ namespace dmlm.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-
-            var user = await UserManager.FindAsync(model.Email, model.Password);
-            var token = UserManager.GenerateUserToken("MobileAuth", user.Id);
-            //var token = SignInManager.UserManager.GenerateUserToken("MobileAuth", user.Id);
-            var loginModel = new dmlm.Models.UserModel.LoginModel() { AccessToken = token, AspUserID = user.Id };
             switch (result)
             {
                 case SignInStatus.Success:
-                    var userModel = new UserModel().LoginUser(model.Email);
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    var token = UserManager.GenerateUserToken("MobileAuth", user.Id);
+                    //var token = SignInManager.UserManager.GenerateUserToken("MobileAuth", user.Id);
+                    var loginModel = new dmlm.Models.UserModel.LoginModel() { AccessToken = token, AspUserID = user.Id };
+                    //var userModel = new UserModel().LoginUser(model.Email);
                     return Json(loginModel);
                 case SignInStatus.LockedOut:
                     return Json(result);

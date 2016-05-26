@@ -28,16 +28,20 @@ namespace dmlm.Models
             public string AspUserID { get; set; }
         }
 
-        public dmlm.User LoginUser(string email)
+        public LoginModel LoginUser(LoginViewModel model)
         {
             using (dmlmEntities db = new dmlmEntities())
             {
-                var user = new dmlm.User();
-                    var userEntity = db.Users.Where(u => u.emailAddress.ToLower() == email.ToLower()).FirstOrDefault();
+                var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = manager.Find(model.Email, model.Password);
+                    var userEntity = db.Users.Where(u => u.emailAddress.ToLower() == model.Email.ToLower()).FirstOrDefault();
                     if (userEntity == null)
                         throw new KeyNotFoundException();
-                    user.loginDate = userEntity.lastUpdateDate ?? DateTime.UtcNow.AddDays(-100);
-                    return user;
+                    userEntity.loginDate = userEntity.lastUpdateDate ?? DateTime.UtcNow.AddDays(-100);
+                //userEntity.aspUserID = user.Id;
+                //ModifyUser(userEntity);
+                var token = manager.GenerateUserToken("MobileAuth", user.Id);
+                return new LoginModel() { AccessToken = token, AspUserID = user.Id };
             }
         }
 

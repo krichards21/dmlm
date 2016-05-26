@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using dmlm;
+using dmlm.Models;
 
 namespace dmlm.Controllers
 {
@@ -72,12 +73,11 @@ namespace dmlm.Controllers
         }
 
         // POST: api/Login
-        //[ResponseType(typeof(Models.UserModel.User))]
-        //[Route("LoginUser/")]
-        //public IHttpActionResult PostLoginUser(Models.UserModel.LoginModel loginModel)
-        //{
-        //    return Ok(new Models.UserModel().GetUserByEmailandPwd(loginModel));
-        //}
+        [Route("LoginUser/")]
+        public IHttpActionResult PostLoginUser(LoginViewModel model)
+        {
+            return Ok(new Models.UserModel().LoginUser(model));
+        }
 
         // POST: api/Users
         [ResponseType(typeof(User))]
