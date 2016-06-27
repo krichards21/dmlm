@@ -308,6 +308,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PageModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Organization.cs">
       <DependentUpon>mobileLogistics.tt</DependentUpon>

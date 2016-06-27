@@ -79,6 +79,13 @@ namespace dmlm.Controllers
             return Ok(new Models.UserModel().LoginUser(model));
         }
 
+        // POST: api/Login
+        [Route("RegisterUser/")]
+        public IHttpActionResult PostRegisterUser(RegisterUser model)
+        {
+            return Ok(new Models.UserModel().RegisterUser(model));
+        }
+
         // POST: api/Users
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)

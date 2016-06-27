@@ -24,6 +24,7 @@ namespace dmlm.Models
         }
         public class LoginModel
         {
+            public int ID { get; set; }
             public string AccessToken { get; set; }
             public string AspUserID { get; set; }
         }
@@ -41,7 +42,33 @@ namespace dmlm.Models
                 //userEntity.aspUserID = user.Id;
                 //ModifyUser(userEntity);
                 var token = manager.GenerateUserToken("MobileAuth", user.Id);
-                return new LoginModel() { AccessToken = token, AspUserID = user.Id };
+                return new LoginModel() { ID = userEntity.Id, AccessToken = token, AspUserID = user.Id };
+            }
+        }
+
+        public LoginModel RegisterUser(RegisterUser model)
+        {
+            using (dmlmEntities db = new dmlmEntities())
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var result = userManager.Create(user, model.Password);
+                if (result.Succeeded)
+                {
+                    HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>().SignIn(user, true, false);
+                    //signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    db.Users.Add(new User() {  aspUserID = user.Id, firstName = model.Firstname, lastName = model.Lastname, cellPhoneNumber = model.Phone,
+                    createDate = DateTime.UtcNow, isActive = true, loginDate = DateTime.UtcNow, emailAddress = model.Email});
+                    db.SaveChanges();
+
+                }
+                return new LoginModel();
             }
         }
 
