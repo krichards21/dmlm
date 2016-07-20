@@ -27,6 +27,9 @@ namespace dmlm.Models
             public int ID { get; set; }
             public string AccessToken { get; set; }
             public string AspUserID { get; set; }
+
+            public bool HasError { get; set; }
+            public List<string> Error { get; set; }
         }
 
         public LoginModel LoginUser(LoginViewModel model)
@@ -51,8 +54,9 @@ namespace dmlm.Models
             using (dmlmEntities db = new dmlmEntities())
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new dmlm.Models.ApplicationDbContext()));
                 var result = userManager.Create(user, model.Password);
+                var registerModel = new LoginModel();
                 if (result.Succeeded)
                 {
                     HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>().SignIn(user, true, false);
@@ -66,9 +70,19 @@ namespace dmlm.Models
                     db.Users.Add(new User() {  aspUserID = user.Id, firstName = model.Firstname, lastName = model.Lastname, cellPhoneNumber = model.Phone,
                     createDate = DateTime.UtcNow, isActive = true, loginDate = DateTime.UtcNow, emailAddress = model.Email});
                     db.SaveChanges();
+                    registerModel.AspUserID = user.Id;
+                    registerModel.HasError = false;
+                    registerModel.AccessToken = user.SecurityStamp;
 
                 }
-                return new LoginModel();
+                else
+                {
+                    registerModel.AspUserID = string.Empty;
+                    registerModel.HasError = true;
+                    registerModel.Error = result.Errors.ToList();
+                    registerModel.AccessToken = string.Empty;
+                }
+                return registerModel;
             }
         }
 
